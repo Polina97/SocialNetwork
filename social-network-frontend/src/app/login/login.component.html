@@ -1,0 +1,13 @@
+<H3></H3>
+<span class="ui-float-label">
+    <input id="loginI" type="text" size="30" pInputText [(ngModel)]="login" required #loginI="ngModel">
+    <label for="loginI">Логин</label>
+</span>
+<H3></H3>
+<span class="ui-float-label">
+    <input id="passwordI" type="password" size="30" pInputText [(ngModel)]="password" required #passwordI="ngModel">
+    <label for="passwordI">Пароль</label>
+</span>
+<br/>
+<button pButton type="button" label="Войти" (click)="makeLogin()"
+        [disabled]="loginI.invalid || passwordI.invalid"></button>
