@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
+
 import {LoginComponent} from '../login/login.component';
 import {MainPageComponent} from '../main-page/main-page.component';
 
@@ -23,9 +23,9 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(
-      appRoutes
-    ),
-    CommonModule
+      appRoutes,
+      { useHash: true }
+    )
   ],
   exports: [
     RouterModule
