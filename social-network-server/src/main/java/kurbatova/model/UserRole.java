@@ -46,6 +46,6 @@ public class UserRole implements Serializable {
 	
 	@Override
 	public String toString() {
-		return String.format("UserRole[userRoleName='%s']", userRoleName);
+		return String.format("UserRole[userId=%d, userRoleName='%s']", userRoleId, userRoleName);
 	}
 }

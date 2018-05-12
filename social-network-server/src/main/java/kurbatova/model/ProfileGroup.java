@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "profile_group")
 public class ProfileGroup implements Serializable {
@@ -23,12 +25,17 @@ public class ProfileGroup implements Serializable {
 	private Long profileGroupId;
 	@Column(name = "CONFIRMED")
 	private Boolean confirmed;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Group.class)
 	@JoinColumn(name = "group_id")
 	private Group group;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
+	
+	public ProfileGroup() {
+	}
 
 	public Long getProfileGroupId() {
 		return profileGroupId;
@@ -53,5 +60,10 @@ public class ProfileGroup implements Serializable {
 	}
 	public void setProfile(Profile profile) {
 		this.profile = profile;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("ProfileGroup[profileGroupId=%d, confirmed='%s']", profileGroupId, confirmed);
 	}
 }

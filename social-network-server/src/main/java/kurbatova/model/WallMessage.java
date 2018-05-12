@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "wall_message")
 public class WallMessage implements Serializable {
@@ -26,9 +28,13 @@ public class WallMessage implements Serializable {
 	private String message;
 	@Column(name = "date")
 	private Date date;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
 	@JoinColumn(name = "message_owner")
 	private Profile messageOwner;
+	
+	public WallMessage() {
+	}
 
 	public Long getWallMessageId() {
 		return wallMessageId;

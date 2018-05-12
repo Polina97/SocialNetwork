@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kurbatova.model.Profile;
 import kurbatova.model.User;
 import kurbatova.repo.ProfileRepository;
@@ -17,13 +19,15 @@ public class ProfileController {
 	@Autowired
 	ProfileRepository profileRepository;
 	
+	ObjectMapper mapper = new ObjectMapper();
+	
 	@PostMapping(value="profile/getById")
 	public Map<String, Object> getProfileById(@RequestParam(value="userId", required=true) String userId) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			User user = new User();
 			user.setUserId(Long.valueOf(userId));
-			Profile profile = profileRepository.getProfileById(user);
+			Profile profile = profileRepository.getProfileByUserId(userId);
 			result.put("result", 0);
 			result.put("profile", profile);
 		} catch (Exception e) {

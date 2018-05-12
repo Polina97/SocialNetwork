@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,6 +19,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import kurbatova.model.enums.MartialStatus;
 import kurbatova.model.enums.UserGender;
@@ -45,7 +48,8 @@ public class Profile implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "martial_status")
 	private MartialStatus martialStatus;
-	@OneToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
@@ -113,6 +117,7 @@ public class Profile implements Serializable {
 	
 	@Override
 	public String toString() {
-		return String.format("Profile[id=%d, firstName='%s']", profileId,  firstName);
+		return String.format("Profile[id=%d, firstName='%s', lastName='%s', birthDay='%s', userGender='%s', address='%s', martialStatus='%s']",
+				profileId,  firstName, lastName, birthDay, userGender, address, martialStatus);
 	}
 }

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "personal_message_profile")
 public class PersonalMessageProfile implements Serializable {
@@ -21,14 +23,19 @@ public class PersonalMessageProfile implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long personalMessageProfileId;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = PersonalMessage.class)
 	@JoinColumn(name = "personal_message_id")
 	private PersonalMessage personalMessage;
 	@Column(name = "GROUP_CHAT")
 	private Boolean isGroupChat;
+	
+	public PersonalMessageProfile() {
+	}
 
 	public Long getPersonalMessageProfileId() {
 		return personalMessageProfileId;
@@ -53,5 +60,10 @@ public class PersonalMessageProfile implements Serializable {
 	}
 	public void setIsGroupChat(Boolean isGroupChat) {
 		this.isGroupChat = isGroupChat;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("PersonalMessageProfile[personalMessageProfileId=%d, isGroupChat='%s']", personalMessageProfileId, isGroupChat);
 	}
 }

@@ -2,7 +2,6 @@ package kurbatova.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
@@ -31,7 +32,8 @@ public class User implements Serializable {
 	private Boolean blocked;
 	@Column(name = "EMAIL")
 	private String email;
-	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+	@JsonIgnore
+	@OneToOne(mappedBy = "user")
 	private Profile profile;
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserRole.class)
 	@JoinColumn(name = "user_role_id")
@@ -91,5 +93,11 @@ public class User implements Serializable {
 
 	public void setProfile(Profile profile) {
 		this.profile = profile;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("User[userId=%d, login='%s', password='%s', blocked='%s', email='%s', userRole='%s']", userId,  login, password, blocked,
+				email, userRole);
 	}
 }

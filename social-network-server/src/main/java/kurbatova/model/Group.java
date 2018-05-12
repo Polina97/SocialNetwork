@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "group")
 public class Group implements Serializable {
@@ -33,6 +35,7 @@ public class Group implements Serializable {
 	private String description;
 	@Column(name = "LOGO_URL")
 	private String logoUrl;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
 	@JoinColumn(name = "owner_id")
 	private Profile owner;
@@ -40,6 +43,9 @@ public class Group implements Serializable {
 	@JoinTable(name = "group_wall", joinColumns = { @JoinColumn(name = "group_id") }, inverseJoinColumns = { @JoinColumn(name = "wall_message_id") })
 	@ManyToMany(targetEntity = WallMessage.class, fetch = FetchType.LAZY)
 	private Set<WallMessage> wallMessages = new TreeSet<WallMessage>();
+	
+	public Group() {
+	}
 	
 	public Long getGroupId() {
 		return groupId;
@@ -82,5 +88,11 @@ public class Group implements Serializable {
 	}
 	public void setWallMessages(Set<WallMessage> wallMessages) {
 		this.wallMessages = wallMessages;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("Group[groupId=%d, name='%s', access='%s', description='%s', logoUrl='%s', wallMessages='%s']", groupId, name, access,
+				description, logoUrl, wallMessages);
 	}
 }

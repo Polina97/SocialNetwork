@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import kurbatova.model.enums.FriendshipStatus;
 
 @Entity
@@ -25,6 +27,7 @@ public class ProfileFriend implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long profileFriendId;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
@@ -34,6 +37,9 @@ public class ProfileFriend implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS")
 	private FriendshipStatus friendshipStatus;
+	
+	public ProfileFriend() {
+	}
 
 	public Long getProfileFriendId() {
 		return profileFriendId;
@@ -58,5 +64,10 @@ public class ProfileFriend implements Serializable {
 	}
 	public void setFriendshipStatus(FriendshipStatus friendshipStatus) {
 		this.friendshipStatus = friendshipStatus;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("ProfileFriend[profileFriendId=%d, friend='%s', friendshipStatus='%s']", profileFriendId, friend, friendshipStatus);
 	}
 }

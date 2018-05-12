@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "profile_photo")
 public class ProfilePhoto implements Serializable {
@@ -25,9 +27,13 @@ public class ProfilePhoto implements Serializable {
 	private String url;
 	@Column(name = "CURRENT")
 	private Boolean current;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
+	
+	public ProfilePhoto() {
+	}
 
 	public Long getProfilePhotoId() {
 		return profilePhotoId;
@@ -52,5 +58,10 @@ public class ProfilePhoto implements Serializable {
 	}
 	public void setProfile(Profile profile) {
 		this.profile = profile;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("ProfilePhoto[profilePhotoId=%d, url='%s', current='%s']", profilePhotoId, url, current);
 	}
 }

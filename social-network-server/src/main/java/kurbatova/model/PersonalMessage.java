@@ -27,6 +27,9 @@ public class PersonalMessage implements Serializable {
 	private Date date;
 	@Column(name = "EDIT_END_DATE")
 	private Date editEndDate;
+	
+	public PersonalMessage() {
+	}
 
 	public Long getPersonalMessageId() {
 		return personalMessageId;
@@ -57,5 +60,11 @@ public class PersonalMessage implements Serializable {
 	}
 	public void setEditEndDate(Date editEndDate) {
 		this.editEndDate = editEndDate;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("PersonalMessage[personalMessageId=%d, message='%s', readed='%s', date='%s', editEndDate='%s']", personalMessageId,
+				message, readed, date, editEndDate);
 	}
 }
