@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {LoginService} from './login.service';
 import {Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -12,14 +13,16 @@ export class LoginComponent {
   password: string;
 
   constructor(private loginService: LoginService,
-              private router: Router) {
+              private router: Router,
+              private cookieService: CookieService) {
   }
 
   makeLogin(): void {
     this.loginService.loginRequest(this.login, this.password).subscribe(
       res => {
         if (res && res.result === 0) {
-          this.router.navigate(['main-page'], {queryParams: { id: res.userId }});
+          this.cookieService.set('userId', res.userId);
+          this.router.navigate(['profile']);
         }
       }, err => {
         console.log(err);

@@ -2,8 +2,6 @@ package kurbatova.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,8 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -49,13 +45,9 @@ public class Profile implements Serializable {
 	@Column(name = "martial_status")
 	private MartialStatus martialStatus;
 	@JsonIgnore
-	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private User user;
-	
-	@JoinTable(name = "profile_wall", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = { @JoinColumn(name = "wall_message_id") })
-	@ManyToMany(targetEntity = WallMessage.class, fetch = FetchType.LAZY)
-	private Set<WallMessage> wallMessages = new TreeSet<WallMessage>();
 	
 	protected Profile() {
 	}
@@ -108,13 +100,7 @@ public class Profile implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public Set<WallMessage> getWallMessages() {
-		return wallMessages;
-	}
-	public void setWallMessages(Set<WallMessage> wallMessages) {
-		this.wallMessages = wallMessages;
-	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("Profile[id=%d, firstName='%s', lastName='%s', birthDay='%s', userGender='%s', address='%s', martialStatus='%s']",

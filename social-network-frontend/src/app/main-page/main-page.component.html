@@ -1,7 +1,11 @@
-<img src="assets/images/static-profile-photo.jpg"/>
-
-<div class="profile-info">
-  <span>Имя: {{profile.firstName}} </span>
-  <br/>
-  <span>Фамилия: {{profile.lastName}}</span>
+<div class="ui-g">
+  <div class="ui-g-2">
+    <nav>
+      <a routerLink="/profile">Profile</a><br/>
+      <a routerLink="/messages">Messages</a><br/>
+      <a routerLink="/friends">Friends</a><br/>
+      <a routerLink="/groups">Groups</a>
+    </nav>
+  </div>
+  <div class="ui-g-10"><router-outlet></router-outlet></div>
 </div>

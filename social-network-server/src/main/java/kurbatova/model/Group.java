@@ -1,8 +1,6 @@
 package kurbatova.model;
 
 import java.io.Serializable;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -39,10 +35,6 @@ public class Group implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
 	@JoinColumn(name = "owner_id")
 	private Profile owner;
-	
-	@JoinTable(name = "group_wall", joinColumns = { @JoinColumn(name = "group_id") }, inverseJoinColumns = { @JoinColumn(name = "wall_message_id") })
-	@ManyToMany(targetEntity = WallMessage.class, fetch = FetchType.LAZY)
-	private Set<WallMessage> wallMessages = new TreeSet<WallMessage>();
 	
 	public Group() {
 	}
@@ -83,16 +75,10 @@ public class Group implements Serializable {
 	public void setOwner(Profile owner) {
 		this.owner = owner;
 	}
-	public Set<WallMessage> getWallMessages() {
-		return wallMessages;
-	}
-	public void setWallMessages(Set<WallMessage> wallMessages) {
-		this.wallMessages = wallMessages;
-	}
 	
 	@Override
 	public String toString() {
 		return String.format("Group[groupId=%d, name='%s', access='%s', description='%s', logoUrl='%s', wallMessages='%s']", groupId, name, access,
-				description, logoUrl, wallMessages);
+				description, logoUrl);
 	}
 }

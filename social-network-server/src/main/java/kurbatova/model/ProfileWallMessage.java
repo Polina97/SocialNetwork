@@ -16,31 +16,35 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "wall_message")
-public class WallMessage implements Serializable {
+@Table(name = "profile_wall_message")
+public class ProfileWallMessage implements Serializable {
 
-	private static final long serialVersionUID = -7731147650763286399L;
+	private static final long serialVersionUID = 3528053478510234916L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private Long wallMessageId;
+	private Long id;
 	@Column(name = "message")
 	private String message;
 	@Column(name = "date")
 	private Date date;
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
-	@JoinColumn(name = "message_owner")
+	@JoinColumn(name = "owner_id")
 	private Profile messageOwner;
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
+	@JoinColumn(name = "profile_id")
+	private Profile profile;
 	
-	public WallMessage() {
+	public ProfileWallMessage() {
 	}
-
-	public Long getWallMessageId() {
-		return wallMessageId;
+	
+	public Long getId() {
+		return id;
 	}
-	public void setWallMessageId(Long wallMessageId) {
-		this.wallMessageId = wallMessageId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getMessage() {
 		return message;
@@ -59,5 +63,16 @@ public class WallMessage implements Serializable {
 	}
 	public void setMessageOwner(Profile messageOwner) {
 		this.messageOwner = messageOwner;
+	}
+	public Profile getProfile() {
+		return profile;
+	}
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("ProfileWallMessage[id=%d, message='%s', date='%s']",id,  message, date);
 	}
 }
