@@ -25,7 +25,7 @@ public class UserController {
 		try {
 			User user = userRepo.findByLoginPassword(login, password);
 			result.put("result", 0);
-			result.put("userId", user.getUserId());
+			result.put("user", user);
 		} catch (Exception e) {
 			System.out.println(e);
 			result.put("result", 1);

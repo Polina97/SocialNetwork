@@ -11,10 +11,19 @@ export class ProfileService {
   constructor(private http: HttpClient) {
   }
 
+  getProfileInfo(profileId: string): Observable<any> {
+    return this.http.post(this.profileUrl + '/getProfile', null, {
+      params: new HttpParams()
+        .set('profileId', profileId)
+    });
+  }
+
   getProfile(userId: string): Observable<any> {
-    return this.http.post(this.profileUrl + '/getById', null, {
+    return this.http.post(this.profileUrl + '/getByUserId', null, {
       params: new HttpParams()
         .set('userId', userId)
     });
   }
+
+
 }

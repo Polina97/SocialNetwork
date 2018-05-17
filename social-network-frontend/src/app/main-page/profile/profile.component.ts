@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Profile} from './shared/profile';
 import {CookieService} from 'ngx-cookie-service';
 import {ProfileService} from './shared/profile.service';
 import * as moment from 'moment';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,21 +13,36 @@ import * as moment from 'moment';
 export class ProfileComponent implements OnInit {
   profile: Profile;
 
-  private userId: string;
+  private profileId;
 
   constructor(private cookieService: CookieService,
-              private profileService: ProfileService) {
-    this.userId = this.cookieService.get('userId');
+              private profileService: ProfileService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.profileService.getProfile(this.userId).subscribe(
+    this.route.queryParams.subscribe(params => {
+      if (params['id']) {
+        this.profileId = params['id'];
+        this.getProfile();
+      }
+    });
+
+  }
+
+  private getProfile(): void {
+    this.profileService.getProfileInfo(this.profileId).subscribe(
       res => {
         if (res && res.result === 0) {
           this.profile = res.profile;
-          this.profile.wallMessages = res.wallMessages;
           this.profile.birthDay = moment(this.profile.birthDay).format('DD.MM.YYYY');
-          this.profile.photoUrl = res.photoUrl;
+          if (res.profilePhotos && res.profilePhotos.length > 0) {
+            res.profilePhotos.forEach(profilePhoto => {
+              if (profilePhoto.current) {
+                this.profile.photoUrl = profilePhoto.url;
+              }
+            });
+          }
         }
       }, err => {
         console.log(err);

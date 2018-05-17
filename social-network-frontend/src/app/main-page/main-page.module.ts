@@ -6,6 +6,8 @@ import {RouterModule} from '@angular/router';
 import {FriendsModule} from './friends/friends.module';
 import {GroupsModule} from './groups/groups.module';
 import {MessagesModule} from './messages/messages.module';
+import {PhotosComponent} from './photos/photos.component';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   imports: [
@@ -14,10 +16,12 @@ import {MessagesModule} from './messages/messages.module';
     FriendsModule,
     GroupsModule,
     MessagesModule,
-    RouterModule
+    RouterModule,
+    ButtonModule
   ],
   declarations: [
-    MainPageComponent
+    MainPageComponent,
+    PhotosComponent
   ]
 })
 export class MainPageModule {

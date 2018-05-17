@@ -21,8 +21,8 @@ export class LoginComponent {
     this.loginService.loginRequest(this.login, this.password).subscribe(
       res => {
         if (res && res.result === 0) {
-          this.cookieService.set('userId', res.userId);
-          this.router.navigate(['profile']);
+          this.cookieService.set('userId', res.user.userId);
+          this.router.navigate(['profile'], {queryParams: {id: res.user.profile.profileId}});
         }
       }, err => {
         console.log(err);

@@ -1,6 +1,7 @@
 package kurbatova.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -8,11 +9,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -45,13 +46,17 @@ public class Profile implements Serializable {
 	@Column(name = "martial_status")
 	private MartialStatus martialStatus;
 	@JsonIgnore
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
-	protected Profile() {
+	@OneToMany(mappedBy="messageOwner", cascade = CascadeType.ALL)
+	private Collection<ProfileWallMessage> wallMessages;
+	@OneToMany(mappedBy="profile", cascade = CascadeType.ALL)
+	private Collection<ProfilePhoto> profilePhotos;
+
+	public Profile() {
 	}
-	
+
 	public Long getProfileId() {
 		return profileId;
 	}
@@ -100,10 +105,35 @@ public class Profile implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public Collection<ProfileWallMessage> getWallMessages() {
+		return wallMessages;
+	}
+	public void setWallMessages(Collection<ProfileWallMessage> wallMessages) {
+		this.wallMessages = wallMessages;
+	}
+	public Collection<ProfilePhoto> getProfilePhotos() {
+		return profilePhotos;
+	}
+	public void setProfilePhotos(Collection<ProfilePhoto> profilePhotos) {
+		this.profilePhotos = profilePhotos;
+	}
 
 	@Override
 	public String toString() {
-		return String.format("Profile[id=%d, firstName='%s', lastName='%s', birthDay='%s', userGender='%s', address='%s', martialStatus='%s']",
-				profileId,  firstName, lastName, birthDay, userGender, address, martialStatus);
+		String result = String.format("Profile[id=%d, firstName='%s', lastName='%s', birthDay='%s', userGender='%s', address='%s', " +
+				" martialStatus='%s']%n", profileId,  firstName, lastName, birthDay, userGender, address, martialStatus);
+		if (wallMessages != null) {
+            for(ProfileWallMessage wallMessage : wallMessages) {
+                result += String.format("ProfileWallMessage[id=%d, message='%s', date='%s']%n",
+                        wallMessage.getId(), wallMessage.getMessage(), wallMessage.getDate());
+            }
+        }
+		if (profilePhotos != null) {
+            for(ProfilePhoto profilePhoto : profilePhotos) {
+                result += String.format("ProfilePhoto[id=%d, url='%s', current='%s']%n",
+                		profilePhoto.getProfilePhotoId(), profilePhoto.getUrl(), profilePhoto.getCurrent());
+            }
+        }
+		return result;
 	}
 }

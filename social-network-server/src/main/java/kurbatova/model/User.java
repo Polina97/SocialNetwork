@@ -2,9 +2,9 @@ package kurbatova.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
@@ -32,10 +30,9 @@ public class User implements Serializable {
 	private Boolean blocked;
 	@Column(name = "EMAIL")
 	private String email;
-	@JsonIgnore
-	@OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Profile profile;
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserRole.class)
+	@ManyToOne
 	@JoinColumn(name = "user_role_id")
 	private UserRole userRole;
 	
@@ -97,7 +94,11 @@ public class User implements Serializable {
 	
 	@Override
 	public String toString() {
-		return String.format("User[userId=%d, login='%s', password='%s', blocked='%s', email='%s', userRole='%s']", userId,  login, password, blocked,
-				email, userRole);
+		String result = String.format("User[userId=%d, login='%s', password='%s', blocked='%s', email='%s', userRole='%s']%n", userId,  login, password,
+				blocked, email, userRole);
+		result += String.format("Profile[id=%d, firstName='%s', lastName='%s', birthDay='%s', userGender='%s', address='%s', martialStatus='%s']", 
+				profile.getProfileId(), profile.getFirstName(), profile.getLastName(), profile.getBirthDay(), profile.getUserGender(),
+				profile.getAddress(), profile.getMartialStatus());
+		return result;
 	}
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +27,7 @@ public class ProfilePhoto implements Serializable {
 	@Column(name = "CURRENT")
 	private Boolean current;
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
+	@ManyToOne
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
 	
