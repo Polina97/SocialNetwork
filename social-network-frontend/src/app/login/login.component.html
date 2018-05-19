@@ -1,13 +1,15 @@
-<H3></H3>
-<span class="ui-float-label">
-    <input id="loginI" type="text" size="30" pInputText [(ngModel)]="login" required #loginI="ngModel">
+<p-selectButton [options]="types" [(ngModel)]="selectedType" (onChange)="handleTypeChange()"></p-selectButton>
+
+<form (submit)="makeLogin()" *ngIf="showLogin">
+  <span class="ui-float-label">
+    <input id="loginI" type="text" size="45" pInputText [(ngModel)]="login" required #loginI="ngModel" name="login">
     <label for="loginI">Логин</label>
-</span>
-<H3></H3>
-<span class="ui-float-label">
-    <input id="passwordI" type="password" size="30" pInputText [(ngModel)]="password" required #passwordI="ngModel">
+  </span>
+  <span class="ui-float-label">
+    <input id="passwordI" type="password" size="45" pInputText [(ngModel)]="password" required #passwordI="ngModel"
+           name="password">
     <label for="passwordI">Пароль</label>
-</span>
-<br/>
-<button pButton type="button" label="Войти" (click)="makeLogin()"
-        [disabled]="loginI.invalid || passwordI.invalid"></button>
+  </span>
+  <button pButton type="button" label="Войти" [disabled]="loginI.invalid || passwordI.invalid"></button>
+</form>
+<app-registration *ngIf="!showLogin"></app-registration>

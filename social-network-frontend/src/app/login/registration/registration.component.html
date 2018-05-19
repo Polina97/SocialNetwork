@@ -1,0 +1,42 @@
+<form #f="ngForm" (submit)="register()">
+  <span class="ui-float-label">
+    <input id="email" type="text" size="45" pInputText [(ngModel)]="registration.email" required #emailM="ngModel"
+           name="email">
+    <label for="email">Почта</label>
+  </span>
+
+  <span class="ui-float-label">
+    <input id="fName" type="text" size="45" pInputText [(ngModel)]="registration.firstName" required #fName="ngModel"
+           name="fName">
+    <label for="fName">Имя</label>
+  </span>
+  <span class="ui-float-label">
+    <input id="lName" type="text" size="45" pInputText [(ngModel)]="registration.lastName" required #lName="ngModel"
+           name="lName">
+    <label for="lName">Фамилия</label>
+  </span>
+
+  <p-radioButton name="gender" value="0" [(ngModel)]="registration.gender" label="Мужчина"></p-radioButton>
+  <p-radioButton name="gender" value="1" [(ngModel)]="registration.gender" label="Женщина"></p-radioButton>
+
+  <p-calendar [(ngModel)]="registration.birthDate" dateFormat="dd.mm.yy" name="birthDate" required [locale]="ru"
+              placeholder="Выберите дату рождения"></p-calendar>
+
+  <span class="ui-float-label">
+    <input id="password" type="password" pPassword [(ngModel)]="registration.password" name="password" required/>
+    <label for="password">Введите пароль</label>
+  </span>
+  <span class="ui-float-label">
+    <input id="repeatPassword" type="password" pInputText [(ngModel)]="registration.repeatPassword"
+           name="repeatPassword" required/>
+    <label for="repeatPassword">Повторите пароль</label>
+  </span>
+  <button pButton type="button" label="Зарегистрироваться"
+          [disabled]="f.invalid || registration.password !== registration.repeatPassword"></button>
+</form>
+
+<p-confirmDialog icon="fa fa-question-circle" width="425" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="No" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
