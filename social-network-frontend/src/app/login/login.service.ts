@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Registration} from './registration/registration';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +24,14 @@ export class LoginService {
   }
 
   register(registration: Registration): Observable<any> {
+    const formattedDate = moment().format('DD.MM.YYYY');
     return this.http.post(this.userUrl + '/register', null, {
       params: new HttpParams()
         .set('email', registration.email)
         .set('firstName', registration.firstName)
         .set('lastName', registration.lastName)
         .set('gender', registration.gender.toString())
-        .set('birthDate', registration.birthDate.toString())
+        .set('birthDate', formattedDate)
         .set('password', registration.password)
     });
   }

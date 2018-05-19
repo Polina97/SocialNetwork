@@ -1,6 +1,8 @@
 <div class="ui-g">
   <div class="ui-g-12">
-
+    <span *ngIf="currentProfile && currentProfile.firstName">
+      Добро пожаловать, {{currentProfile.firstName}}
+    </span>
     <button pButton type="button" label="Выйти" (click)="logout()"></button>
   </div>
   <div class="ui-g-2">

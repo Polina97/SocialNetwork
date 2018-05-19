@@ -1,3 +1,23 @@
-<p>
-  friends works!
-</p>
+<p-tabView>
+  <p-tabPanel header="Мои друзья">
+    <div *ngIf="friends">
+      <div *ngFor="let friend of friends">
+        <app-friend [friend]="friend" [isFriend]="true"></app-friend>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Найти друзей">
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Введите имя и/или фамилию" [(ngModel)]="searchValue">
+      <button pButton type="button" label="Поиск" (click)="findFriends()"></button>
+    </div>
+    <div *ngIf="friends">
+      <div *ngFor="let friend of friends">
+        <app-friend [friend]="friend" [isFriend]="false"></app-friend>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Запросы">
+  </p-tabPanel>
+</p-tabView>
+

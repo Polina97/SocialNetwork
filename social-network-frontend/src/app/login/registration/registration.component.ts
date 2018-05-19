@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Registration} from './registration';
 import {LoginService} from '../login.service';
 import {ConfirmationService} from 'primeng/api';
@@ -9,7 +9,7 @@ import {ConfirmationService} from 'primeng/api';
   styleUrls: ['./registration.component.css'],
   providers: [ConfirmationService]
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent{
   registration: Registration;
   ru: any;
 
@@ -26,9 +26,6 @@ export class RegistrationComponent implements OnInit {
       today: 'Сегодня',
       clear: 'Очистить'
     };
-  }
-
-  ngOnInit() {
   }
 
   register(): void {
@@ -49,5 +46,4 @@ export class RegistrationComponent implements OnInit {
       }
     });
   }
-
 }

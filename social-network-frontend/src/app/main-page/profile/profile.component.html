@@ -7,6 +7,10 @@
   <span>Дата рождения: {{profile.birthDay}}</span><br/>
   <span>Семейный статус: {{profile.martialStatus}}</span>
 </div>
+<div *ngIf="!myProfile">
+  <button pButton type="button" label="Добавить в друзья"></button>
+  <button pButton type="button" label="Написать сообщение"></button>
+</div>
 <br/>
 <div class="wall-message">
   <div *ngIf="profile && profile.wallMessages">

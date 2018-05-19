@@ -83,11 +83,9 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public Profile getProfile() {
 		return profile;
 	}
-
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
@@ -96,9 +94,12 @@ public class User implements Serializable {
 	public String toString() {
 		String result = String.format("User[userId=%d, login='%s', password='%s', blocked='%s', email='%s', userRole='%s']%n", userId,  login, password,
 				blocked, email, userRole);
-		result += String.format("Profile[id=%d, firstName='%s', lastName='%s', birthDay='%s', userGender='%s', address='%s', martialStatus='%s']", 
-				profile.getProfileId(), profile.getFirstName(), profile.getLastName(), profile.getBirthDay(), profile.getUserGender(),
-				profile.getAddress(), profile.getMartialStatus());
+		if (profile != null) {
+			result += String.format("Profile[id=%d, firstName='%s', lastName='%s', birthDay='%s', userGender='%s', address='%s', martialStatus='%s']", 
+					profile.getProfileId(), profile.getFirstName(), profile.getLastName(), profile.getBirthDay(), profile.getUserGender(),
+					profile.getAddress(), profile.getMartialStatus());
+		}
+		
 		return result;
 	}
 }

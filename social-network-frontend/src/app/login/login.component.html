@@ -1,6 +1,6 @@
 <p-selectButton [options]="types" [(ngModel)]="selectedType" (onChange)="handleTypeChange()"></p-selectButton>
 
-<form (submit)="makeLogin()" *ngIf="showLogin">
+<form *ngIf="showLogin">
   <span class="ui-float-label">
     <input id="loginI" type="text" size="45" pInputText [(ngModel)]="login" required #loginI="ngModel" name="login">
     <label for="loginI">Логин</label>
@@ -10,6 +10,7 @@
            name="password">
     <label for="passwordI">Пароль</label>
   </span>
-  <button pButton type="button" label="Войти" [disabled]="loginI.invalid || passwordI.invalid"></button>
+  <button pButton type="button" label="Войти" (click)="makeLogin()"
+          [disabled]="loginI.invalid || passwordI.invalid"></button>
 </form>
 <app-registration *ngIf="!showLogin"></app-registration>

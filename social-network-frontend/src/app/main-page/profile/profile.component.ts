@@ -12,6 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   profile: Profile;
+  myProfile: boolean;
 
   private profileId;
 
@@ -24,10 +25,14 @@ export class ProfileComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['id']) {
         this.profileId = params['id'];
+        this.myProfile = this.profileId === this.cookieService.get('profileId');
+        this.getProfile();
+      } else {
+        this.profileId = this.cookieService.get('profileId');
+        this.myProfile = true;
         this.getProfile();
       }
     });
-
   }
 
   private getProfile(): void {

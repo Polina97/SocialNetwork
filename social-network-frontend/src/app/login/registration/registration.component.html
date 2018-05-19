@@ -1,4 +1,4 @@
-<form #f="ngForm" (submit)="register()">
+<form #f="ngForm">
   <span class="ui-float-label">
     <input id="email" type="text" size="45" pInputText [(ngModel)]="registration.email" required #emailM="ngModel"
            name="email">
@@ -31,12 +31,12 @@
            name="repeatPassword" required/>
     <label for="repeatPassword">Повторите пароль</label>
   </span>
-  <button pButton type="button" label="Зарегистрироваться"
+  <button pButton type="button" label="Зарегистрироваться" (click)="register()"
           [disabled]="f.invalid || registration.password !== registration.repeatPassword"></button>
 </form>
 
 <p-confirmDialog icon="fa fa-question-circle" width="425" #cd>
   <p-footer>
-    <button type="button" pButton icon="fa-close" label="No" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="fa-check" label="Yes" (click)="cd.accept()"></button>
   </p-footer>
 </p-confirmDialog>

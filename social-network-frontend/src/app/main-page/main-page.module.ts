@@ -8,6 +8,8 @@ import {GroupsModule} from './groups/groups.module';
 import {MessagesModule} from './messages/messages.module';
 import {PhotosComponent} from './photos/photos.component';
 import {ButtonModule} from 'primeng/button';
+import {InputTextModule} from 'primeng/primeng';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import {ButtonModule} from 'primeng/button';
     GroupsModule,
     MessagesModule,
     RouterModule,
-    ButtonModule
+    ButtonModule,
+    InputTextModule,
+    FormsModule
   ],
   declarations: [
     MainPageComponent,

@@ -10,7 +10,7 @@ import kurbatova.model.Profile;
 
 public interface ProfileRepository extends CrudRepository<Profile, Long> {
 
-	@Query(value = "SELECT * FROM profile p, profile_wall_message pw, profile_photo pf WHERE p.user_id = :profileId AND pf.current = true", 
+	@Query(value = "SELECT * FROM profile p, profile_wall_message pw, profile_photo pf WHERE p.id = :profileId AND pf.current = true", 
 		    nativeQuery=true
 		)
 	Set<Profile> getProfileByProfileId(@Param("profileId") String profileId);
