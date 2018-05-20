@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Registration} from './registration';
 import {LoginService} from '../login.service';
 import {ConfirmationService} from 'primeng/api';
+import {CALENDAR_RU} from '../../shared/constants';
 
 @Component({
   selector: 'app-registration',
@@ -16,16 +17,7 @@ export class RegistrationComponent{
   constructor(private loginService: LoginService,
               private confirmationService: ConfirmationService) {
     this.registration = new Registration();
-    this.ru = {
-      firstDayOfWeek: 1,
-      dayNames: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-      dayNamesShort: ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'],
-      dayNamesMin: ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'],
-      monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-      monthNamesShort: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-      today: 'Сегодня',
-      clear: 'Очистить'
-    };
+    this.ru = CALENDAR_RU;
   }
 
   register(): void {

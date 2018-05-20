@@ -1,23 +1,36 @@
 <p-tabView (onChange)="tabChangeHandler($event.index)">
   <p-tabPanel header="Мои друзья">
-    <div *ngIf="friends">
-      <div *ngFor="let friend of friends">
-        <app-friend [friend]="friend" [isFriend]="true"></app-friend>
+    <ng-template pTemplate="content">
+      <div *ngIf="friends">
+        <div *ngFor="let friend of friends">
+          <app-friend [friend]="friend" [isFriend]="true"></app-friend>
+        </div>
       </div>
-    </div>
+    </ng-template>
   </p-tabPanel>
   <p-tabPanel header="Найти друзей">
-    <div class="ui-inputgroup">
-      <input type="text" pInputText placeholder="Введите имя и/или фамилию" [(ngModel)]="searchValue">
-      <button pButton type="button" label="Поиск" (click)="findFriends()"></button>
-    </div>
-    <div *ngIf="friends">
-      <div *ngFor="let friend of friends">
-        <app-friend [friend]="friend" [isFriend]="false"></app-friend>
+    <ng-template pTemplate="content">
+      <div class="ui-inputgroup">
+        <input type="text" pInputText placeholder="Введите имя и/или фамилию" [(ngModel)]="searchFriend.name">
+        <button pButton type="button" label="Поиск" (click)="findFriends()"></button>
       </div>
-    </div>
+      <p-radioButton name="gender" value="0" [(ngModel)]="searchFriend.gender" label="Мужчина"></p-radioButton>
+      <p-radioButton name="gender" value="1" [(ngModel)]="searchFriend.gender" label="Женщина"></p-radioButton>
+      <p-calendar [(ngModel)]="searchFriend.bDayRange" dateFormat="dd.mm.yy" name="birthDate" required [locale]="ru"
+                  placeholder="Выберите дату рождения" selectionMode="range" [selectOtherMonths]="true"></p-calendar>
+      <p-dropdown [options]="martialStatuses" [(ngModel)]="searchFriend.martialStatus" placeholder="Выберите статус"
+                  [showClear]="true"></p-dropdown>
+
+      <div *ngIf="friends">
+        <div *ngFor="let friend of friends">
+          <app-friend [friend]="friend" [isFriend]="false"></app-friend>
+        </div>
+      </div>
+    </ng-template>
   </p-tabPanel>
   <p-tabPanel header="Запросы">
+    <ng-template pTemplate="content">
+    </ng-template>
   </p-tabPanel>
 </p-tabView>
 

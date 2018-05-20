@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Profile} from '../profile/shared/profile';
 import {FriendsService} from './shared/friends.service';
 import {CookieService} from 'ngx-cookie-service';
+import {SearchFriend} from './shared/search-friend';
+import {CALENDAR_RU, MartialStatus} from '../../shared/constants';
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'app-friends',
@@ -10,12 +13,22 @@ import {CookieService} from 'ngx-cookie-service';
 })
 export class FriendsComponent implements OnInit {
   friends: Profile[];
-  searchValue: string;
+  searchFriend: SearchFriend;
+  ru: any;
+  martialStatuses: SelectItem[];
 
   private myProfileId: string;
 
   constructor(private friendsService: FriendsService,
               private cookieService: CookieService) {
+    this.searchFriend = new SearchFriend();
+    this.ru = CALENDAR_RU;
+    this.martialStatuses = [
+      {label: 'Не определён', value: MartialStatus.NONE},
+      {label: 'Без пары', value: MartialStatus.SINGLE},
+      {label: 'С парой', value: MartialStatus.ENGAGED},
+      {label: 'В браке', value: MartialStatus.MARRIED}
+    ];
   }
 
   ngOnInit() {
@@ -25,7 +38,7 @@ export class FriendsComponent implements OnInit {
 
   findFriends(): void {
     this.friends = [];
-    this.friendsService.findFriends(this.myProfileId, '', '', '').subscribe(
+    this.friendsService.findFriends(this.myProfileId, this.searchFriend).subscribe(
       res => {
         if (res && res.result === 0) {
           this.friends = res.notFriends;

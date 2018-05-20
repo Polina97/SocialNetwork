@@ -1,6 +1,5 @@
 package kurbatova.repo;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.Query;
@@ -20,10 +19,4 @@ public interface ProfileRepository extends CrudRepository<Profile, Long> {
 		    nativeQuery=true
 		)
 	Profile getByUserId(@Param("userId")Long userId);
-	
-	@Query(value = "SELECT * FROM profile p WHERE p.id != :profileId AND EXISTS " +
-			"(SELECT * FROM profile_friend pf WHERE pf.profile_id = :profileId OR pf.friend_id = :profileId)", 
-		    nativeQuery=true
-		)
-	List<Profile> findNewFriends(@Param("profileId") String profileId);
 }

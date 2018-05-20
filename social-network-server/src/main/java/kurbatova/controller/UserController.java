@@ -76,7 +76,6 @@ public class UserController {
 	}
 	
 	private User createUser(String email, String password, UserRole userRole) {
-		System.out.println("start");
 		User user = new User();
 		user.setEmail(email);
 		user.setPassword(password);
@@ -88,7 +87,7 @@ public class UserController {
 	}
 	
 	private Profile createProfile(String firstName, String lastName, String gender, String birthDate, User user) throws ParseException {
-		SimpleDateFormat formatter = new SimpleDateFormat("DD.MM.YYYY");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		Date birthDay;
 		try {
 			birthDay = formatter.parse(birthDate);

@@ -24,7 +24,7 @@ export class LoginService {
   }
 
   register(registration: Registration): Observable<any> {
-    const formattedDate = moment().format('DD.MM.YYYY');
+    const formattedDate = moment(registration.birthDate).format('DD.MM.YYYY');
     return this.http.post(this.userUrl + '/register', null, {
       params: new HttpParams()
         .set('email', registration.email)
