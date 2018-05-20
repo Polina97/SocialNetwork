@@ -39,10 +39,10 @@ public class ProfileController {
 	}
 	
 	@PostMapping(value="profile/getProfile")
-	public Map<String, Object> getProfileById(@RequestParam(value="profileId", required=true) String userId) {
+	public Map<String, Object> getProfileById(@RequestParam(value="profileId", required=true) String profileId) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			Set<Profile> profileSet = profileRepository.getProfileByProfileId(userId);
+			Set<Profile> profileSet = profileRepository.getProfileByProfileId(profileId);
 			Object[] profileArr = profileSet.toArray();
 			result.put("result", 0);
 			result.put("profile", profileArr[0]);

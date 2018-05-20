@@ -1,4 +1,4 @@
-<p-tabView>
+<p-tabView (onChange)="tabChangeHandler($event.index)">
   <p-tabPanel header="Мои друзья">
     <div *ngIf="friends">
       <div *ngFor="let friend of friends">

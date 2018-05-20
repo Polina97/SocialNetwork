@@ -53,6 +53,10 @@ public class Profile implements Serializable {
 	private Collection<ProfileWallMessage> wallMessages;
 	@OneToMany(mappedBy="profile", cascade = CascadeType.ALL)
 	private Collection<ProfilePhoto> profilePhotos;
+	@OneToMany(mappedBy="profile", cascade = CascadeType.ALL)
+	private Collection<ProfileFriend> profileFriends;
+	@OneToMany(mappedBy="friend", cascade = CascadeType.ALL)
+	private Collection<ProfileFriend> friendProfiles;
 
 	public Profile() {
 	}
@@ -116,6 +120,12 @@ public class Profile implements Serializable {
 	}
 	public void setProfilePhotos(Collection<ProfilePhoto> profilePhotos) {
 		this.profilePhotos = profilePhotos;
+	}
+	public Collection<ProfileFriend> getProfileFriends() {
+		return profileFriends;
+	}
+	public void setProfileFriends(Collection<ProfileFriend> profileFriends) {
+		this.profileFriends = profileFriends;
 	}
 
 	@Override

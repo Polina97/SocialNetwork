@@ -1,3 +1,4 @@
-<p>
-  friend works!
-</p>
+<a (click)="goToFriend()">{{friend.firstName}} {{friend.lastName}}</a>
+<img *ngIf="friend && friend.photoUrl" src="{{friend.photoUrl}}"/>
+<button pButton type="button" label="Добавить в друзья" *ngIf="!isFriend"></button>
+<button pButton type="button" label="Написать сообщение"></button>

@@ -3,6 +3,7 @@ import {WallMessage} from '../../shared/wall-message/wall-message';
 import {ProfilePhoto} from '../../photos/profile-photo';
 
 export class Profile {
+  profileId: number;
   firstName: string;
   lastName: string;
   birthDay: string;

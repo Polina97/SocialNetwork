@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,10 +27,10 @@ public class ProfileFriend implements Serializable {
 	@Column(name = "ID")
 	private Long profileFriendId;
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
+	@ManyToOne
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
+	@ManyToOne
 	@JoinColumn(name = "friend_id")
 	private Profile friend;
 	@Enumerated(EnumType.STRING)
