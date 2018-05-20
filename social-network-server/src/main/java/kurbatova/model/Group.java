@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +31,7 @@ public class Group implements Serializable {
 	@Column(name = "LOGO_URL")
 	private String logoUrl;
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
+	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private Profile owner;
 	
@@ -78,7 +77,6 @@ public class Group implements Serializable {
 	
 	@Override
 	public String toString() {
-		return String.format("Group[groupId=%d, name='%s', access='%s', description='%s', logoUrl='%s', wallMessages='%s']", groupId, name, access,
-				description, logoUrl);
+		return String.format("Group[groupId=%d, name='%s', access='%s', description='%s', logoUrl='%s']", groupId, name, access, description, logoUrl);
 	}
 }
