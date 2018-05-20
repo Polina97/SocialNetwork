@@ -3,11 +3,12 @@
     <ng-template pTemplate="content">
       <div *ngIf="friends">
         <div *ngFor="let friend of friends">
-          <app-friend [friend]="friend" [isFriend]="true"></app-friend>
+          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.FRIEND"></app-friend>
         </div>
       </div>
     </ng-template>
   </p-tabPanel>
+
   <p-tabPanel header="Найти друзей">
     <ng-template pTemplate="content">
       <div class="ui-inputgroup">
@@ -23,13 +24,26 @@
 
       <div *ngIf="friends">
         <div *ngFor="let friend of friends">
-          <app-friend [friend]="friend" [isFriend]="false"></app-friend>
+          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.NONE"></app-friend>
         </div>
       </div>
     </ng-template>
   </p-tabPanel>
+
   <p-tabPanel header="Запросы">
     <ng-template pTemplate="content">
+      Запросы: <br/>
+      <div *ngIf="friendRequests">
+        <div *ngFor="let friend of friendRequests">
+          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.SUBSCRIBER" [isRequest]="true"></app-friend>
+        </div>
+      </div>
+      Подписчики: <br/>
+      <div *ngIf="subscribers">
+        <div *ngFor="let friend of subscribers">
+          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.SUBSCRIBER" [isRequest]="false"></app-friend>
+        </div>
+      </div>
     </ng-template>
   </p-tabPanel>
 </p-tabView>

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kurbatova.model.Profile;
 import kurbatova.model.ProfileFriend;
+import kurbatova.model.enums.FriendshipStatus;
 import kurbatova.model.enums.MartialStatus;
 import kurbatova.model.enums.UserGender;
 import kurbatova.repo.ProfileFriendRepository;
@@ -31,22 +33,33 @@ public class FriendsController {
 	@PersistenceContext
     private EntityManager manager;
 	
-	@PostMapping(value="friends/getFriends")
-	public Map<String, Object> getFriends(@RequestParam(value="profileId", required=true) String profileId) {
+	@PostMapping(value="friends/getByFriendshipStatus")
+	public Map<String, Object> getFriends(@RequestParam(value="profileId", required=true) String profileId,
+			@RequestParam(value="friendshipStatus", required=true) String friendshipStatus) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			List<ProfileFriend> profileFriends = friendRepository.findProfileFriends(Long.valueOf(profileId));
-			Set<Profile> friends = new HashSet<Profile>();
+			List<ProfileFriend> profileFriends = friendRepository.findProfileByFriendStatus(Long.valueOf(profileId), FriendshipStatus.values()[Integer.valueOf(friendshipStatus)].toString());
+			Set<Profile> outComeRequests = new HashSet<Profile>();
+			Set<Profile> inComeRequests = new HashSet<Profile>();
 			for (ProfileFriend profileFriend: profileFriends) {
 				if (profileFriend.getProfile().getProfileId() != Long.valueOf(profileId)) {
-					friends.add(profileFriend.getProfile());
+					inComeRequests.add(profileFriend.getProfile());
 				}
 				if (profileFriend.getFriend().getProfileId() != Long.valueOf(profileId)) {
-					friends.add(profileFriend.getFriend());
+					outComeRequests.add(profileFriend.getFriend());
 				}
 			}
+
 			result.put("result", 0);
-			result.put("friends", friends);
+			if (FriendshipStatus.values()[Integer.valueOf(friendshipStatus)] == FriendshipStatus.FRIEND) {
+				Set<Profile> friends = new HashSet<Profile>();
+				friends.addAll(outComeRequests);
+				friends.addAll(inComeRequests);
+				result.put("friends", friends);
+			} else {
+				result.put("requests", outComeRequests);
+				result.put("subscribers", inComeRequests);
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 			result.put("result", 1);
@@ -100,6 +113,39 @@ public class FriendsController {
 
 			result.put("result", 0);
 			result.put("notFriends", notFriends);
+		} catch (Exception e) {
+			System.out.println(e);
+			result.put("result", 1);
+		}
+		
+		return result;
+	}
+	
+	@PostMapping(value="friends/addToFriends")
+	public Map<String, Object> addToFriends(@RequestParam(value="profileId", required=true) String profileId,
+			@RequestParam(value="friendId", required=true) String friendId,
+			@RequestParam(value="friendshipStatus", required=true) String status) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			Optional<ProfileFriend> profileFriendOptional = friendRepository.findFriendPair(Long.valueOf(profileId), Long.valueOf(friendId));
+			if (profileFriendOptional.isPresent()) {
+				ProfileFriend profileFriend = profileFriendOptional.get();
+				profileFriend.setFriendshipStatus(FriendshipStatus.values()[Integer.valueOf(status)]);
+				friendRepository.save(profileFriend);
+				result.put("result", 0);
+			} else {
+				Profile profile = new Profile();
+				profile.setProfileId(Long.valueOf(profileId));
+				Profile friend = new Profile();
+				friend.setProfileId(Long.valueOf(friendId));
+
+				ProfileFriend profileFriend = new ProfileFriend();
+				profileFriend.setProfile(profile);
+				profileFriend.setFriend(friend);
+				profileFriend.setFriendshipStatus(FriendshipStatus.values()[Integer.valueOf(status)]);
+				friendRepository.save(profileFriend);
+				result.put("result", 0);
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 			result.put("result", 1);

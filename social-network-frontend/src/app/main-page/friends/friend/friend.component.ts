@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Profile} from '../../profile/shared/profile';
 import {Router} from '@angular/router';
+import {FriendshipStatus} from '../../../shared/constants';
 
 @Component({
   selector: 'app-friend',
@@ -9,7 +10,10 @@ import {Router} from '@angular/router';
 })
 export class FriendComponent implements OnInit {
   @Input() friend: Profile;
-  @Input() isFriend: boolean;
+  @Input() friendshipStatus: FriendshipStatus;
+  @Input() isRequest: boolean;
+
+  friendshipStatuses = FriendshipStatus;
 
   constructor(private router: Router) {
   }

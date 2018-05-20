@@ -1,4 +1,7 @@
 <a (click)="goToFriend()">{{friend.firstName}} {{friend.lastName}}</a>
 <img *ngIf="friend && friend.photoUrl" src="{{friend.photoUrl}}"/>
-<button pButton type="button" label="Добавить в друзья" *ngIf="!isFriend"></button>
-<button pButton type="button" label="Написать сообщение"></button>
+<button pButton type="button" label="Написать сообщение" *ngIf="friendshipStatus !== friendshipStatuses.BLOCKED"></button>
+<button pButton type="button" label="Добавить в друзья" *ngIf="friendshipStatus === friendshipStatuses.NONE"></button>
+<button pButton type="button" label="Удалить из друзей" *ngIf="friendshipStatus === friendshipStatuses.FRIEND"></button>
+<button pButton type="button" label="Принять запрос" *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && isRequest"></button>
+<button pButton type="button" label="Отменить запрос" *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && !isRequest"></button>

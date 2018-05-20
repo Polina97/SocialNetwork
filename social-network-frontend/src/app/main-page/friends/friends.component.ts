@@ -3,7 +3,7 @@ import {Profile} from '../profile/shared/profile';
 import {FriendsService} from './shared/friends.service';
 import {CookieService} from 'ngx-cookie-service';
 import {SearchFriend} from './shared/search-friend';
-import {CALENDAR_RU, MartialStatus} from '../../shared/constants';
+import {CALENDAR_RU, FriendshipStatus, MartialStatus} from '../../shared/constants';
 import {SelectItem} from 'primeng/api';
 
 @Component({
@@ -13,9 +13,12 @@ import {SelectItem} from 'primeng/api';
 })
 export class FriendsComponent implements OnInit {
   friends: Profile[];
+  friendRequests: Profile[];
+  subscribers: Profile[];
   searchFriend: SearchFriend;
   ru: any;
   martialStatuses: SelectItem[];
+  friendshipStatuses = FriendshipStatus;
 
   private myProfileId: string;
 
@@ -33,7 +36,7 @@ export class FriendsComponent implements OnInit {
 
   ngOnInit() {
     this.myProfileId = this.cookieService.get('profileId');
-    this.getFriends();
+    this.getFriends(FriendshipStatus.FRIEND);
   }
 
   findFriends(): void {
@@ -49,18 +52,25 @@ export class FriendsComponent implements OnInit {
 
   tabChangeHandler(index: number): void {
     if (index === 0) {
-      this.getFriends();
-    } else {
+      this.getFriends(FriendshipStatus.FRIEND);
+    } else if (index === 1){
       this.findFriends();
+    } else {
+      this.getFriends(FriendshipStatus.SUBSCRIBER);
     }
   }
 
-  private getFriends(): void {
+  private getFriends(friendshipStatus: FriendshipStatus): void {
     this.friends = [];
-    this.friendsService.getFriends(this.myProfileId).subscribe(
+    this.friendsService.getFriendsByStatus(this.myProfileId, friendshipStatus).subscribe(
       res => {
         if (res && res.result === 0) {
-          this.friends = res.friends;
+          if (res.friends) {
+            this.friends = res.friends;
+          } else {
+            this.friendRequests = res.requests;
+            this.subscribers = res.subscribers;
+          }
         }
       }
     );

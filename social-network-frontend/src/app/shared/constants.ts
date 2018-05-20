@@ -16,3 +16,7 @@ export const CALENDAR_RU = {
   today: 'Сегодня',
   clear: 'Очистить'
 };
+
+export enum FriendshipStatus {
+  SUBSCRIBER, FRIEND, BLOCKED, NONE
+}

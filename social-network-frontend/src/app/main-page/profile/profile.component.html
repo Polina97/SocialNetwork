@@ -1,5 +1,4 @@
 <div class="profile-info" *ngIf="profile">
-  <img *ngIf="!profile || !profile.photoUrl" src="assets/images/static-profile-photo.jpg"/>
   <img *ngIf="profile && profile.photoUrl" src="{{profile.photoUrl}}"/>
   <br/>
   <span>Имя: {{profile.firstName}} </span><br/>
