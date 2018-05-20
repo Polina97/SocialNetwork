@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "personal_message")
@@ -27,6 +31,10 @@ public class PersonalMessage implements Serializable {
 	private Date date;
 	@Column(name = "EDIT_END_DATE")
 	private Date editEndDate;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	private Profile owner;
 	
 	public PersonalMessage() {
 	}
@@ -61,7 +69,13 @@ public class PersonalMessage implements Serializable {
 	public void setEditEndDate(Date editEndDate) {
 		this.editEndDate = editEndDate;
 	}
-	
+	public Profile getOwner() {
+		return owner;
+	}
+	public void setOwner(Profile owner) {
+		this.owner = owner;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("PersonalMessage[personalMessageId=%d, message='%s', readed='%s', date='%s', editEndDate='%s']", personalMessageId,

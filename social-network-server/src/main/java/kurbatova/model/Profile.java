@@ -59,6 +59,8 @@ public class Profile implements Serializable {
 	private Collection<ProfileFriend> friendProfiles;
 	@OneToMany(mappedBy="owner", cascade = CascadeType.ALL)
 	private Collection<Group> groups;
+	@OneToMany(mappedBy="owner", cascade = CascadeType.ALL)
+	private Collection<PersonalMessage> personalMessages;
 
 	public Profile() {
 	}
