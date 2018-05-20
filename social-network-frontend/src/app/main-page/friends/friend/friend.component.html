@@ -1,7 +1,12 @@
 <a (click)="goToFriend()">{{friend.firstName}} {{friend.lastName}}</a>
 <img *ngIf="friend && friend.photoUrl" src="{{friend.photoUrl}}"/>
-<button pButton type="button" label="Написать сообщение" *ngIf="friendshipStatus !== friendshipStatuses.BLOCKED"></button>
-<button pButton type="button" label="Добавить в друзья" *ngIf="friendshipStatus === friendshipStatuses.NONE"></button>
-<button pButton type="button" label="Удалить из друзей" *ngIf="friendshipStatus === friendshipStatuses.FRIEND"></button>
-<button pButton type="button" label="Принять запрос" *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && isRequest"></button>
-<button pButton type="button" label="Отменить запрос" *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && !isRequest"></button>
+<button pButton type="button" label="Написать сообщение"
+        *ngIf="friendshipStatus !== friendshipStatuses.BLOCKED"></button>
+<button pButton type="button" label="Добавить в друзья" (click)="addOrAcceptFriend(true)"
+        *ngIf="friendshipStatus === friendshipStatuses.NONE"></button>
+<button pButton type="button" label="Удалить из друзей" (click)="deleteFriendship()"
+        *ngIf="friendshipStatus === friendshipStatuses.FRIEND"></button>
+<button pButton type="button" label="Принять запрос" (click)="addOrAcceptFriend(false)"
+        *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && !isRequest"></button>
+<button pButton type="button" label="Отменить запрос" (click)="deleteFriendship()"
+        *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && isRequest"></button>

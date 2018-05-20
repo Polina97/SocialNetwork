@@ -19,13 +19,15 @@ export class FriendsComponent implements OnInit {
   ru: any;
   martialStatuses: SelectItem[];
   friendshipStatuses = FriendshipStatus;
+  myProfileId: string;
 
-  private myProfileId: string;
+  private currentIndex: number;
 
   constructor(private friendsService: FriendsService,
               private cookieService: CookieService) {
     this.searchFriend = new SearchFriend();
     this.ru = CALENDAR_RU;
+    this.currentIndex = 0;
     this.martialStatuses = [
       {label: 'Не определён', value: MartialStatus.NONE},
       {label: 'Без пары', value: MartialStatus.SINGLE},
@@ -51,6 +53,7 @@ export class FriendsComponent implements OnInit {
   }
 
   tabChangeHandler(index: number): void {
+    this.currentIndex = index;
     if (index === 0) {
       this.getFriends(FriendshipStatus.FRIEND);
     } else if (index === 1){
@@ -58,6 +61,10 @@ export class FriendsComponent implements OnInit {
     } else {
       this.getFriends(FriendshipStatus.SUBSCRIBER);
     }
+  }
+
+  handleFriendshipChange(): void {
+    this.tabChangeHandler(this.currentIndex);
   }
 
   private getFriends(friendshipStatus: FriendshipStatus): void {

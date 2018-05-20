@@ -30,6 +30,7 @@ public class ProfileFriend implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "friend_id")
 	private Profile friend;

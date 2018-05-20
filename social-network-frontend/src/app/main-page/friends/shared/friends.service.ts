@@ -40,12 +40,20 @@ export class FriendsService {
     });
   }
 
-  addToFriends(profileId: string, friendId: string, friendshipStatus: FriendshipStatus) {
+  addToFriends(profileId: string, friendId: string, friendshipStatus: FriendshipStatus): Observable<any> {
     return this.http.post(this.friendsUrl + '/addToFriends', null, {
       params: new HttpParams()
         .set('profileId', profileId)
         .set('friendId', friendId)
         .set('friendshipStatus', friendshipStatus.toString())
+    });
+  }
+
+  deleteFriendship(profileId: string, friendId: string): Observable<any> {
+    return this.http.post(this.friendsUrl + '/deleteFriendship', null, {
+      params: new HttpParams()
+        .set('profileId', profileId)
+        .set('friendId', friendId)
     });
   }
 }

@@ -131,7 +131,7 @@ public class FriendsController {
 			if (profileFriendOptional.isPresent()) {
 				ProfileFriend profileFriend = profileFriendOptional.get();
 				profileFriend.setFriendshipStatus(FriendshipStatus.values()[Integer.valueOf(status)]);
-				friendRepository.save(profileFriend);
+				profileFriend = friendRepository.save(profileFriend);
 				result.put("result", 0);
 			} else {
 				Profile profile = new Profile();
@@ -145,6 +145,26 @@ public class FriendsController {
 				profileFriend.setFriendshipStatus(FriendshipStatus.values()[Integer.valueOf(status)]);
 				friendRepository.save(profileFriend);
 				result.put("result", 0);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			result.put("result", 1);
+		}
+		
+		return result;
+	}
+	
+	@PostMapping(value="friends/deleteFriendship")
+	public Map<String, Object> deleteFriendship(@RequestParam(value="profileId", required=true) String profileId,
+			@RequestParam(value="friendId", required=true) String friendId) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			Optional<ProfileFriend> profileFriendOptional = friendRepository.findFriendPair(Long.valueOf(profileId), Long.valueOf(friendId));
+			if (profileFriendOptional.isPresent()) {
+				friendRepository.delete(profileFriendOptional.get());
+				result.put("result", 0);
+			} else {
+				result.put("result", 1);
 			}
 		} catch (Exception e) {
 			System.out.println(e);

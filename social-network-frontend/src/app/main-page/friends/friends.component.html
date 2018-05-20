@@ -3,7 +3,8 @@
     <ng-template pTemplate="content">
       <div *ngIf="friends">
         <div *ngFor="let friend of friends">
-          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.FRIEND"></app-friend>
+          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.FRIEND"
+                      [currentProfileId]="myProfileId" (friendshipChanged)="handleFriendshipChange()"></app-friend>
         </div>
       </div>
     </ng-template>
@@ -24,7 +25,8 @@
 
       <div *ngIf="friends">
         <div *ngFor="let friend of friends">
-          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.NONE"></app-friend>
+          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.NONE"
+                      [currentProfileId]="myProfileId" (friendshipChanged)="handleFriendshipChange()"></app-friend>
         </div>
       </div>
     </ng-template>
@@ -32,16 +34,18 @@
 
   <p-tabPanel header="Запросы">
     <ng-template pTemplate="content">
-      Запросы: <br/>
+      Мои запросы: <br/>
       <div *ngIf="friendRequests">
         <div *ngFor="let friend of friendRequests">
-          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.SUBSCRIBER" [isRequest]="true"></app-friend>
+          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.SUBSCRIBER" [isRequest]="true"
+                      [currentProfileId]="myProfileId" (friendshipChanged)="handleFriendshipChange()"></app-friend>
         </div>
       </div>
       Подписчики: <br/>
       <div *ngIf="subscribers">
         <div *ngFor="let friend of subscribers">
-          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.SUBSCRIBER" [isRequest]="false"></app-friend>
+          <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.SUBSCRIBER" [isRequest]="false"
+                      [currentProfileId]="myProfileId" (friendshipChanged)="handleFriendshipChange()"></app-friend>
         </div>
       </div>
     </ng-template>

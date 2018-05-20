@@ -21,7 +21,7 @@ public interface ProfileFriendRepository extends CrudRepository<ProfileFriend, L
 		)
 	List<ProfileFriend> findFriends(@Param("profileId")Long profileId);
 	
-	@Query(value = "SELECT * FROM profile_friend pf WHERE pf.profile_id = :profileId AND friend_id =:friendId", 
+	@Query(value = "SELECT * FROM profile_friend pf WHERE (pf.profile_id = :profileId AND friend_id =:friendId) OR (pf.profile_id = :friendId AND friend_id =:profileId)", 
 		    nativeQuery=true
 		)
 	Optional<ProfileFriend> findFriendPair(@Param("profileId")Long profileId, @Param("friendId")Long friendId);
