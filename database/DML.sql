@@ -45,10 +45,10 @@ VALUES
     (1, 2, 'test group wall message', NOW());
 
 INSERT INTO social_network.personal_message
-	(message, readed, date, edit_end_date)
+	(message, readed, date, edit_end_date, owner_id)
 VALUES
-	('Hi Olga', 1, '2018-03-12 10:10:10', '2018-03-12 10:20:10'),
-    ('Hi Ferdi', 0, '2018-03-12 12:15:00', '2018-03-12 12:25:00');
+	('Hi Olga', 1, '2018-03-12 10:10:10', '2018-03-12 10:20:10', 1),
+    ('Hi Ferdi', 0, '2018-03-12 12:15:00', '2018-03-12 12:25:00', 3);
     
 INSERT INTO social_network.personal_message_profile
 	(profile_id, personal_message_id)
