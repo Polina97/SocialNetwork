@@ -10,6 +10,7 @@ import {FriendshipStatus} from '../../../shared/constants';
 })
 export class FriendsService {
   private friendsUrl = 'friends';
+  private messageUrl = 'message';
 
   constructor(private http: HttpClient) {
   }
@@ -54,6 +55,15 @@ export class FriendsService {
       params: new HttpParams()
         .set('profileId', profileId)
         .set('friendId', friendId)
+    });
+  }
+
+  writeMessage(profileId: string, friendId: string, message: string): Observable<any> {
+    return this.http.post(this.messageUrl + '/writeMessage', null, {
+      params: new HttpParams()
+        .set('ownerId', profileId)
+        .set('targetId', friendId)
+        .set('message', message)
     });
   }
 }

@@ -3,6 +3,8 @@ import {Profile} from '../../profile/shared/profile';
 import {Router} from '@angular/router';
 import {FriendshipStatus} from '../../../shared/constants';
 import {FriendsService} from '../shared/friends.service';
+import {ConfirmationService} from 'primeng/api';
+import {Message} from '../../messages/shared/message';
 
 @Component({
   selector: 'app-friend',
@@ -17,9 +19,11 @@ export class FriendComponent implements OnInit {
   @Output() friendshipChanged: EventEmitter<any> = new EventEmitter<any>();
 
   friendshipStatuses = FriendshipStatus;
+  message: Message;
 
   constructor(private router: Router,
               private friendsService: FriendsService) {
+    this.message = new Message();
   }
 
   ngOnInit() {
@@ -45,6 +49,16 @@ export class FriendComponent implements OnInit {
       res => {
         if (res && res.result === 0) {
           this.friendshipChanged.emit();
+        }
+      }
+    );
+  }
+
+  sendMessage(overlayPanel:any): void {
+    this.friendsService.writeMessage(this.currentProfileId, this.friend.profileId.toString(), this.message.message).subscribe(
+      res => {
+        if (res && res.result === 0) {
+          overlayPanel.hide();
         }
       }
     );

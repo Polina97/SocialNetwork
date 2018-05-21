@@ -64,6 +64,16 @@ public class PersonalMessageProfile implements Serializable {
 	
 	@Override
 	public String toString() {
-		return String.format("PersonalMessageProfile[personalMessageProfileId=%d, isGroupChat='%s']", personalMessageProfileId, isGroupChat);
+		String result = String.format("PersonalMessageProfile[personalMessageProfileId=%d, isGroupChat='%s']%n",
+				personalMessageProfileId, isGroupChat);
+		if (profile != null) {
+            result += String.format("Profile[profileId=%d]%n",
+            		profile.getProfileId());
+        }
+		if (personalMessage != null) {
+            result += String.format("PersonalMessage[personalMessageId=%d, ownerId='%s']",
+            		personalMessage.getPersonalMessageId(), personalMessage.getOwner().getProfileId());
+        }
+		return result;
 	}
 }

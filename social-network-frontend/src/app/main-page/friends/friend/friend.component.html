@@ -1,6 +1,6 @@
 <a (click)="goToFriend()">{{friend.firstName}} {{friend.lastName}}</a>
 <img *ngIf="friend && friend.photoUrl" src="{{friend.photoUrl}}"/>
-<button pButton type="button" label="Написать сообщение"
+<button pButton type="button" label="Написать сообщение" (click)="op.toggle($event)"
         *ngIf="friendshipStatus !== friendshipStatuses.BLOCKED"></button>
 <button pButton type="button" label="Добавить в друзья" (click)="addOrAcceptFriend(true)"
         *ngIf="friendshipStatus === friendshipStatuses.NONE"></button>
@@ -10,3 +10,12 @@
         *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && !isRequest"></button>
 <button pButton type="button" label="Отменить запрос" (click)="deleteFriendship()"
         *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && isRequest"></button>
+
+<p-overlayPanel #op>
+  <span class="ui-float-label">
+    <textarea id="messageId" pInputTextarea [(ngModel)]="message.message"></textarea>
+    <label for="messageId">Сообщение для {{friend.firstName}}</label>
+  </span>
+  <button pButton type="button" label="Отправить сообщение" (click)="sendMessage(op)"></button>
+  <button pButton type="button" label="Отмена" (click)="op.hide(); message.message = null"></button>
+</p-overlayPanel>

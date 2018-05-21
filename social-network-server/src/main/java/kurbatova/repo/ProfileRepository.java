@@ -19,4 +19,9 @@ public interface ProfileRepository extends CrudRepository<Profile, Long> {
 		    nativeQuery=true
 		)
 	Profile getByUserId(@Param("userId")Long userId);
+	
+	@Query(value = "SELECT * FROM social_network.profile p WHERE p.id IN :profileIds", 
+		    nativeQuery=true
+		)
+	Set<Profile> getProfilesById(@Param("profileIds") Iterable<Long> profileIds);
 }
