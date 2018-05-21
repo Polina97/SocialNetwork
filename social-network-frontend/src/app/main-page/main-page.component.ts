@@ -11,6 +11,7 @@ import {Profile} from './profile/shared/profile';
 })
 export class MainPageComponent implements OnInit {
   currentProfile: Profile;
+  isAdmin: boolean;
 
   private userId: string;
 
@@ -18,6 +19,7 @@ export class MainPageComponent implements OnInit {
               private router: Router,
               private profileService: ProfileService) {
     this.userId = this.cookieService.get('userId');
+    this.isAdmin = this.cookieService.get('userRoleName') === 'Admin';
   }
 
   ngOnInit() {

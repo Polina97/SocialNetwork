@@ -10,6 +10,7 @@ import {PhotosComponent} from './photos/photos.component';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/primeng';
 import {FormsModule} from '@angular/forms';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {FormsModule} from '@angular/forms';
   ],
   declarations: [
     MainPageComponent,
-    PhotosComponent
+    PhotosComponent,
+    ManageUsersComponent
   ]
 })
 export class MainPageModule {

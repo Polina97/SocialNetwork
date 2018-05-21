@@ -10,7 +10,8 @@
       <a routerLink="/profile">Profile</a><br/>
       <a routerLink="/messages">Messages</a><br/>
       <a routerLink="/friends">Friends</a><br/>
-      <a routerLink="/groups">Groups</a>
+      <a routerLink="/groups">Groups</a><br/>
+      <a routerLink="/manage-users" *ngIf="isAdmin">Manage users</a>
     </nav>
   </div>
   <div class="ui-g-10"><router-outlet></router-outlet></div>

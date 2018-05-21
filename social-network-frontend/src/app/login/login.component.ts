@@ -34,6 +34,7 @@ export class LoginComponent {
         if (res && res.result === 0) {
           this.cookieService.set('userId', res.user.userId);
           this.cookieService.set('profileId', res.user.profile.profileId);
+          this.cookieService.set('userRoleName', res.user.userRole.userRoleName);
           this.router.navigate(['profile'], {queryParams: {id: res.user.profile.profileId}});
         }
       }, err => {
