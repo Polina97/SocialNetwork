@@ -3,7 +3,6 @@ package kurbatova.controller;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -102,7 +101,7 @@ public class PersonalMessageController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		try {
-			List<PersonalMessage> personalMessages = messageRepo.getAllMessages(Long.valueOf(ownerId), Long.valueOf(targetId));
+			Set<PersonalMessage> personalMessages = messageRepo.getAllMessages(Long.valueOf(ownerId), Long.valueOf(targetId));
 			result.put("result", 0);
 			result.put("messages", personalMessages);
 		} catch (Exception e) {

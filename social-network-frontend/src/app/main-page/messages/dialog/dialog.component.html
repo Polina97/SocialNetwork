@@ -1,8 +1,17 @@
-<div *ngFor="let message of messages">
-  <div>
-    <span>{{message.ownerIdOnly}}</span><br/>
-    <span>{{message.date}}</span><br/>
-    <span>{{message.message}}</span><br/>
-    -------------------------------------
+<div *ngIf="messages">
+  <div *ngFor="let message of messages">
+    <div>
+      <span>{{message.ownerIdOnly}}</span><br/>
+      <span>{{message.date}}</span><br/>
+      <span>{{message.message}}</span><br/>
+      -------------------------------------
+    </div>
   </div>
 </div>
+
+<br/>
+<span class="ui-float-label">
+    <textarea id="messageId" pInputTextarea [(ngModel)]="newMessage.message"></textarea>
+    <label for="messageId">Сообщение</label>
+</span>
+<button pButton type="button" label="Отправить сообщение" (click)="sendMessage()"></button>

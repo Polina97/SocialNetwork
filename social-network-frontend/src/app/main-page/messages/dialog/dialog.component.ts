@@ -12,12 +12,13 @@ import {CookieService} from 'ngx-cookie-service';
 export class DialogComponent implements OnInit {
   currentProfileId: string;
   targetProfileId: string;
-
   messages: Message[];
+  newMessage: Message;
 
   constructor(private messagesService: MessagesService,
               private route: ActivatedRoute,
               private cookieService: CookieService) {
+    this.newMessage = new Message();
   }
 
   ngOnInit() {
@@ -36,6 +37,16 @@ export class DialogComponent implements OnInit {
       res => {
         if (res && res.result === 0) {
           this.messages = res.messages;
+        }
+      }
+    );
+  }
+
+  sendMessage(overlayPanel:any): void {
+    this.messagesService.writeMessage(this.currentProfileId, this.targetProfileId, this.newMessage.message).subscribe(
+      res => {
+        if (res && res.result === 0) {
+          this.getAllMessages();
         }
       }
     );
