@@ -53,8 +53,8 @@ VALUES
 INSERT INTO social_network.personal_message_profile
 	(profile_id, personal_message_id)
 VALUES 
-	(1, 2),
-    (2, 1);
+	(3, 1),
+    (1, 2);
     
 INSERT INTO social_network.profile_photo
 	(url, current, profile_id)
