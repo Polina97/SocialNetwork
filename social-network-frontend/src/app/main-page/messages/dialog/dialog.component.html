@@ -1,3 +1,8 @@
-<p>
-  dialog works!
-</p>
+<div *ngFor="let message of messages">
+  <div>
+    <span>{{message.ownerIdOnly}}</span><br/>
+    <span>{{message.date}}</span><br/>
+    <span>{{message.message}}</span><br/>
+    -------------------------------------
+  </div>
+</div>

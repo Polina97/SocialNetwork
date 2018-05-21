@@ -35,6 +35,7 @@ public class PersonalMessage implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private Profile owner;
+	private Long ownerIdOnly;
 	
 	public PersonalMessage() {
 	}
@@ -75,10 +76,16 @@ public class PersonalMessage implements Serializable {
 	public void setOwner(Profile owner) {
 		this.owner = owner;
 	}
+	public Long getOwnerIdOnly() {
+		return owner.getProfileId();
+	}
+	public void setOwnerIdOnly(Long ownerIdOnly) {
+		this.ownerIdOnly = ownerIdOnly;
+	}
 
 	@Override
 	public String toString() {
-		return String.format("PersonalMessage[personalMessageId=%d, message='%s', readed='%s', date='%s', editEndDate='%s']", personalMessageId,
-				message, readed, date, editEndDate);
+		return String.format("PersonalMessage[personalMessageId=%d, message='%s', readed='%s', date='%s', editEndDate='%s', ownerId='%s']", personalMessageId,
+				message, readed, date, editEndDate, ownerIdOnly);
 	}
 }

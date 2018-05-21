@@ -5,4 +5,5 @@ export class Message {
   date: string;
   editEndDate?: string;
   owner: string;
+  ownerIdOnly: string;
 }

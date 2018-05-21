@@ -132,6 +132,22 @@ public class Profile implements Serializable {
 		this.profileFriends = profileFriends;
 	}
 
+	public Collection<ProfileFriend> getFriendProfiles() {
+		return friendProfiles;
+	}
+
+	public void setFriendProfiles(Collection<ProfileFriend> friendProfiles) {
+		this.friendProfiles = friendProfiles;
+	}
+
+	public Collection<PersonalMessage> getPersonalMessages() {
+		return personalMessages;
+	}
+
+	public void setPersonalMessages(Collection<PersonalMessage> personalMessages) {
+		this.personalMessages = personalMessages;
+	}
+
 	@Override
 	public String toString() {
 		String result = String.format("Profile[id=%d, firstName='%s', lastName='%s', birthDay='%s', userGender='%s', address='%s', " +

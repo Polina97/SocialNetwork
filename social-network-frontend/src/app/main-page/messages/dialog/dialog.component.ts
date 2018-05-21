@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Message} from '../shared/message';
+import {MessagesService} from '../shared/messages.service';
+import {ActivatedRoute} from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dialog',
@@ -6,10 +10,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
+  currentProfileId: string;
+  targetProfileId: string;
 
-  constructor() { }
+  messages: Message[];
+
+  constructor(private messagesService: MessagesService,
+              private route: ActivatedRoute,
+              private cookieService: CookieService) {
+  }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['id']) {
+        this.targetProfileId = params['id'];
+        this.currentProfileId = this.cookieService.get('profileId');
+        this.getAllMessages();
+      }
+    });
+
+  }
+
+  getAllMessages(): void {
+    this.messagesService.getAllMessages(this.currentProfileId, this.targetProfileId).subscribe(
+      res => {
+        if (res && res.result === 0) {
+          this.messages = res.messages;
+        }
+      }
+    );
   }
 
 }

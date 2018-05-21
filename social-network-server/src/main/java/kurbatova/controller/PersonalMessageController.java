@@ -94,4 +94,21 @@ public class PersonalMessageController {
 		
 		return result;
 	}
+	
+	@PostMapping(value="message/getAllMessages")
+	public Map<String, Object> getAllMessages(
+			@RequestParam(value="ownerId", required=true) String ownerId,
+			@RequestParam(value="targetId", required=true) String targetId) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		try {
+			List<PersonalMessage> personalMessages = messageRepo.getAllMessages(Long.valueOf(ownerId), Long.valueOf(targetId));
+			result.put("result", 0);
+			result.put("messages", personalMessages);
+		} catch (Exception e) {
+			System.out.println(e);
+			result.put("result", 1);
+		}
+		return result;
+	}
 }

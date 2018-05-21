@@ -26,4 +26,12 @@ export class MessagesService {
         .set('ownerId', profileId)
     });
   }
+
+  getAllMessages(profileId: string, targetId: string): Observable<any> {
+    return this.http.post(this.messageUrl + '/getAllMessages', null, {
+      params: new HttpParams()
+        .set('ownerId', profileId)
+        .set('targetId', targetId)
+    });
+  }
 }

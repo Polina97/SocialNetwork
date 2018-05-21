@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,11 +23,11 @@ public class PersonalMessageProfile implements Serializable {
 	@Column(name = "ID")
 	private Long personalMessageProfileId;
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
+	@ManyToOne(targetEntity = Profile.class)
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = PersonalMessage.class)
+	@ManyToOne(targetEntity = PersonalMessage.class)
 	@JoinColumn(name = "personal_message_id")
 	private PersonalMessage personalMessage;
 	@Column(name = "GROUP_CHAT")

@@ -7,6 +7,7 @@ import {ProfileComponent} from '../main-page/profile/profile.component';
 import {FriendsComponent} from '../main-page/friends/friends.component';
 import {GroupsComponent} from '../main-page/groups/groups.component';
 import {MessagesComponent} from '../main-page/messages/messages.component';
+import {DialogComponent} from '../main-page/messages/dialog/dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -37,6 +38,10 @@ const appRoutes: Routes = [
       {
         path: 'messages',
         component: MessagesComponent
+      },
+      {
+        path: 'messages/dialog',
+        component: DialogComponent
       }
     ]
   },
