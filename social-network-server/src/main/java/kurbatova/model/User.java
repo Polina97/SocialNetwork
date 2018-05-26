@@ -39,14 +39,6 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public User(String login, String password, Boolean blocked, String email, UserRole userRole) {
-		this.login = login;
-		this.password = password;
-		this.blocked = blocked;
-		this.email = email;
-		this.userRole = userRole;
-	}
-
 	public Long getUserId() {
 		return userId;
 	}
@@ -94,6 +86,7 @@ public class User implements Serializable {
 	public String toString() {
 		String result = String.format("User[userId=%d, login='%s', password='%s', blocked='%s', email='%s', userRole='%s']%n", userId,  login, password,
 				blocked, email, userRole);
+		System.out.println(result);
 		if (profile != null) {
 			result += String.format("Profile[id=%d, firstName='%s', lastName='%s', birthDay='%s', userGender='%s', address='%s', martialStatus='%s']", 
 					profile.getProfileId(), profile.getFirstName(), profile.getLastName(), profile.getBirthDay(), profile.getUserGender(),

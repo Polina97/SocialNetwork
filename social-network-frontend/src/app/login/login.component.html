@@ -13,4 +13,7 @@
   <button pButton type="button" label="Войти" (click)="makeLogin()"
           [disabled]="loginI.invalid || passwordI.invalid"></button>
 </form>
+<div *ngIf="userBlocked">
+  Пользователь заблокирован
+</div>
 <app-registration *ngIf="!showLogin"></app-registration>

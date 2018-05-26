@@ -15,6 +15,7 @@ export class LoginComponent {
   types: SelectItem[];
   selectedType: number;
   showLogin: boolean;
+  userBlocked: boolean;
 
   constructor(private loginService: LoginService,
               private router: Router,
@@ -26,16 +27,25 @@ export class LoginComponent {
       {label: 'Регистрация', value: 1}
     ];
     this.selectedType = 0;
+    this.userBlocked = false;
   }
 
   makeLogin(): void {
     this.loginService.loginRequest(this.login, this.password).subscribe(
       res => {
         if (res && res.result === 0) {
-          this.cookieService.set('userId', res.user.userId);
-          this.cookieService.set('profileId', res.user.profile.profileId);
-          this.cookieService.set('userRoleName', res.user.userRole.userRoleName);
-          this.router.navigate(['profile'], {queryParams: {id: res.user.profile.profileId}});
+          if (res.user.blocked) {
+            this.userBlocked = true;
+            setTimeout(() => {
+              this.userBlocked = false;
+            }, 2000);
+          } else {
+            this.userBlocked = false;
+            this.cookieService.set('userId', res.user.userId);
+            this.cookieService.set('profileId', res.user.profile.profileId);
+            this.cookieService.set('userRoleName', res.user.userRole.userRoleName);
+            this.router.navigate(['profile'], {queryParams: {id: res.user.profile.profileId}});
+          }
         }
       }, err => {
         console.log(err);

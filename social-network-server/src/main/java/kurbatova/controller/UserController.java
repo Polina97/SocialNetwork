@@ -4,10 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,6 +66,62 @@ public class UserController {
 			if (userRole.isPresent()) {
 				User user = createUser(email, password, userRole.get());
 				createProfile(firstName, lastName, gender, birthDate, user);
+				result.put("result", 0);
+			} else {
+				result.put("result", 1);
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			result.put("result", 1);
+		}
+		return result;
+	}
+	
+	@GetMapping(value="user/getSimpleUsers")
+	public Map<String, Object> getSimpleUsers() {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			Optional<UserRole> userRole = userRoleRepo.findByName("User");
+			if (userRole.isPresent()) {
+				List<User> users = userRepo.findByUserRole(userRole.get());
+				result.put("result", 0);
+				for (User user: users) {
+					user.setProfile(null);
+					user.setUserRole(null);
+					user.setPassword(null);
+				}
+				result.put("users", users);
+			} else {
+				result.put("result", 1);
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			result.put("result", 1);
+		}
+		return result;
+	}
+	
+	@PostMapping(value="user/changeUserInfo")
+	public Map<String, Object> changeUserInfo(@RequestParam(value="id", required=true) String userId,
+			@RequestParam(value="email", required=false) String email,
+			@RequestParam(value="password", required=false) String password,
+			@RequestParam(value="blocked", required=false) String blocked) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			Optional<User> userOptional = userRepo.findById(Long.valueOf(userId));
+			if (userOptional.isPresent()) {
+				User user = userOptional.get();
+				if (email != null) {
+					user.setEmail(email);
+				}
+				if (password != null) {
+					user.setPassword(password);
+				}
+				if (blocked != null) {
+					user.setBlocked( Boolean.valueOf(blocked));
+				}
+				
+				userRepo.save(user);
 				result.put("result", 0);
 			} else {
 				result.put("result", 1);

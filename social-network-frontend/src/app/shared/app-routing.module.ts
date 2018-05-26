@@ -19,11 +19,11 @@ const appRoutes: Routes = [
     path: '',
     component: MainPageComponent,
     children: [
-      {
-        path: '',
-        redirectTo: 'profile',
-        pathMatch: 'full'
-      },
+      // {
+      //   path: '',
+      //   redirectTo: 'profile',
+      //   pathMatch: 'full'
+      // },
       {
         path: 'profile',
         component: ProfileComponent

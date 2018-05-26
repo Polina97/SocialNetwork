@@ -10,7 +10,7 @@ import {PhotosComponent} from './photos/photos.component';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/primeng';
 import {FormsModule} from '@angular/forms';
-import { ManageUsersComponent } from './manage-users/manage-users.component';
+import {ManageUsersModule} from './manage-users/manage-users.module';
 
 @NgModule({
   imports: [
@@ -22,12 +22,12 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
     RouterModule,
     ButtonModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
+    ManageUsersModule
   ],
   declarations: [
     MainPageComponent,
-    PhotosComponent,
-    ManageUsersComponent
+    PhotosComponent
   ]
 })
 export class MainPageModule {
