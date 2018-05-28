@@ -17,13 +17,13 @@ const appRoutes: Routes = [
   },
   {
     path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
     component: MainPageComponent,
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: 'profile',
-      //   pathMatch: 'full'
-      // },
       {
         path: 'profile',
         component: ProfileComponent
@@ -49,11 +49,6 @@ const appRoutes: Routes = [
         component: ManageUsersComponent
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
   }
 ];
 
