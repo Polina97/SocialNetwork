@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Profile} from '../profile/shared/profile';
 import {FriendsService} from './shared/friends.service';
 import {CookieService} from 'ngx-cookie-service';
@@ -9,7 +9,8 @@ import {SelectItem} from 'primeng/api';
 @Component({
   selector: 'app-friends',
   templateUrl: './friends.component.html',
-  styleUrls: ['./friends.component.css']
+  styleUrls: ['./friends.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FriendsComponent implements OnInit {
   friends: Profile[];

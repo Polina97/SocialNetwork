@@ -1,15 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {Profile} from '../../profile/shared/profile';
 import {Router} from '@angular/router';
 import {FriendshipStatus} from '../../../shared/constants';
 import {FriendsService} from '../shared/friends.service';
-import {ConfirmationService} from 'primeng/api';
 import {Message} from '../../messages/shared/message';
 
 @Component({
   selector: 'app-friend',
   templateUrl: './friend.component.html',
-  styleUrls: ['./friend.component.css']
+  styleUrls: ['./friend.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FriendComponent implements OnInit {
   @Input() friend: Profile;

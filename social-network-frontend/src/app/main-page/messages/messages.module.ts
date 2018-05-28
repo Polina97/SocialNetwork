@@ -6,13 +6,15 @@ import {MessagesService} from './shared/messages.service';
 import {InputTextareaModule} from 'primeng/primeng';
 import {FormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     InputTextareaModule,
-    ButtonModule
+    ButtonModule,
+    SharedModule
   ],
   declarations: [
     MessagesComponent,

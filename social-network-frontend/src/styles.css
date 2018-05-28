@@ -5,3 +5,10 @@
   height: 1px;
   margin-bottom: 10px;
 }
+
+.line_short {
+  background-color: #007bff;
+  width: 50%;
+  height: 1px;
+  margin-bottom: 5px;
+}

@@ -16,14 +16,15 @@
         <input type="text" pInputText placeholder="Введите имя и/или фамилию" [(ngModel)]="searchFriend.name">
         <button pButton type="button" label="Поиск" (click)="findFriends()"></button>
       </div>
-      <p-radioButton name="gender" value="0" [(ngModel)]="searchFriend.gender" label="Мужчина"></p-radioButton>
-      <p-radioButton name="gender" value="1" [(ngModel)]="searchFriend.gender" label="Женщина"></p-radioButton>
+      <p-radioButton name="gender" value="0" [(ngModel)]="searchFriend.gender" label="М"></p-radioButton>
+      <p-radioButton name="gender" value="1" [(ngModel)]="searchFriend.gender" label="Ж"></p-radioButton>
       <p-calendar [(ngModel)]="searchFriend.bDayRange" dateFormat="dd.mm.yy" name="birthDate" required [locale]="ru"
-                  placeholder="Выберите дату рождения" selectionMode="range" [selectOtherMonths]="true"></p-calendar>
+                  placeholder="Выберите дату рождения" selectionMode="range" [selectOtherMonths]="true"
+                  class="calendar"></p-calendar>
       <p-dropdown [options]="martialStatuses" [(ngModel)]="searchFriend.martialStatus" placeholder="Выберите статус"
                   [showClear]="true"></p-dropdown>
 
-      <div *ngIf="friends">
+      <div *ngIf="friends" class="friends">
         <div *ngFor="let friend of friends">
           <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.NONE"
                       [currentProfileId]="myProfileId" (friendshipChanged)="handleFriendshipChange()"></app-friend>
@@ -35,12 +36,13 @@
   <p-tabPanel header="Запросы">
     <ng-template pTemplate="content">
       Мои запросы: <br/>
-      <div *ngIf="friendRequests">
+      <div *ngIf="friendRequests" class="requests">
         <div *ngFor="let friend of friendRequests">
           <app-friend [friend]="friend" [friendshipStatus]="friendshipStatuses.SUBSCRIBER" [isRequest]="true"
                       [currentProfileId]="myProfileId" (friendshipChanged)="handleFriendshipChange()"></app-friend>
         </div>
       </div>
+      <div class="line"></div>
       Подписчики: <br/>
       <div *ngIf="subscribers">
         <div *ngFor="let friend of subscribers">

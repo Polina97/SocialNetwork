@@ -37,8 +37,8 @@
           [disabled]="f.invalid || registration.password !== registration.repeatPassword"></button>
 </form>
 
-<p-confirmDialog icon="fa fa-question-circle" width="425" #cd>
+<p-confirmDialog width="425" [closable]="false" #cd>
   <p-footer>
-    <button type="button" pButton icon="fa-check" label="Yes" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="fa-check" label="Перейти на вход" (click)="cd.accept()"></button>
   </p-footer>
 </p-confirmDialog>

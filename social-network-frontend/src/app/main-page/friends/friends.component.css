@@ -1,0 +1,27 @@
+.ui-inputgroup {
+  margin-bottom: 10px;
+}
+
+.ui-inputgroup input {
+  width: 60%;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  padding: .375rem .75rem;
+  line-height: 1.5;
+}
+
+p-radioButton {
+  margin-right: 40px
+}
+
+p-calendar {
+  margin-right: 40px;
+}
+
+.friends {
+  margin-top: 30px;
+}
+
+.requests {
+  margin-bottom: 10px;
+}

@@ -1,3 +1,6 @@
-<div *ngFor="let profile of profiles">
-  <span (click)="goToDialog(profile.profileId)">Диалог с: {{profile.firstName}} {{profile.lastName}}</span>
+<div *ngFor="let profile of profiles" class="dialogs">
+  <div class="dialog_elem">
+    <span (click)="goToDialog(profile.profileId)">Диалог с: {{profile.firstName}} {{profile.lastName}}</span>
+  </div>
+  <div class="line"></div>
 </div>

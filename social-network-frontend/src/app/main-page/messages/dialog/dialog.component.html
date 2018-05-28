@@ -1,17 +1,20 @@
 <div *ngIf="messages">
   <div *ngFor="let message of messages">
-    <div>
-      <span>{{message.ownerIdOnly}}</span><br/>
-      <span>{{message.date}}</span><br/>
-      <span>{{message.message}}</span><br/>
-      -------------------------------------
+    <div class="message">
+      <span *ngIf="message.ownerIdOnly.toString() === currentProfileId" class="person">Вы</span>
+      <span *ngIf="message.ownerIdOnly.toString() === targetProfileId" class="person">Собеседник</span>
+      <span>{{message.date | dateFormat:'MM.DD.YYYY в HH:mm'}}</span>
+      <span class="message_text">{{message.message}}</span>
+      <div class="line_short"></div>
     </div>
   </div>
 </div>
 
-<br/>
-<span class="ui-float-label">
-    <textarea id="messageId" pInputTextarea [(ngModel)]="newMessage.message"></textarea>
-    <label for="messageId">Сообщение</label>
-</span>
-<button pButton type="button" label="Отправить сообщение" (click)="sendMessage()"></button>
+<div class="send_message">
+  <span class="ui-float-label">
+      <textarea id="messageId" [rows]="4" [cols]="50" pInputTextarea [(ngModel)]="newMessage.message"
+                [autoResize]="'autoResize'"></textarea>
+      <label for="messageId">Сообщение</label>
+  </span>
+  <button pButton type="button" label="Отправить сообщение" (click)="sendMessage()"></button>
+</div>

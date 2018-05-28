@@ -1,0 +1,16 @@
+.message span {
+  display: block;
+  margin: 5px;
+}
+
+.person {
+  font-style: italic!important;
+}
+
+.message_text {
+  margin-bottom: 20px!important;
+}
+
+.send_message {
+  margin-top: 30px;
+}

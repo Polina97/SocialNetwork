@@ -1,15 +1,19 @@
-<a (click)="goToFriend()">{{friend.firstName}} {{friend.lastName}}</a>
-<img *ngIf="friend && friend.photoUrl" src="{{friend.photoUrl}}"/>
-<button pButton type="button" label="Написать сообщение" (click)="op.toggle($event)"
-        *ngIf="friendshipStatus !== friendshipStatuses.BLOCKED"></button>
-<button pButton type="button" label="Добавить в друзья" (click)="addOrAcceptFriend(true)"
-        *ngIf="friendshipStatus === friendshipStatuses.NONE"></button>
-<button pButton type="button" label="Удалить из друзей" (click)="deleteFriendship()"
-        *ngIf="friendshipStatus === friendshipStatuses.FRIEND"></button>
-<button pButton type="button" label="Принять запрос" (click)="addOrAcceptFriend(false)"
-        *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && !isRequest"></button>
-<button pButton type="button" label="Отменить запрос" (click)="deleteFriendship()"
-        *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && isRequest"></button>
+<div class="ui-g friend">
+  <div class="ui-g-3">
+    <a (click)="goToFriend()" class="friend_link">{{friend.firstName}} {{friend.lastName}}</a>
+  </div>
+  <img *ngIf="friend && friend.photoUrl" src="{{friend.photoUrl}}"/>
+  <button pButton type="button" label="Написать сообщение" (click)="op.toggle($event)"
+          *ngIf="friendshipStatus !== friendshipStatuses.BLOCKED"></button>
+  <button pButton type="button" label="Добавить в друзья" (click)="addOrAcceptFriend(true)"
+          *ngIf="friendshipStatus === friendshipStatuses.NONE"></button>
+  <button pButton type="button" label="Удалить из друзей" (click)="deleteFriendship()"
+          *ngIf="friendshipStatus === friendshipStatuses.FRIEND"></button>
+  <button pButton type="button" label="Принять запрос" (click)="addOrAcceptFriend(false)"
+          *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && !isRequest"></button>
+  <button pButton type="button" label="Отменить запрос" (click)="deleteFriendship()"
+          *ngIf="friendshipStatus === friendshipStatuses.SUBSCRIBER && isRequest"></button>
+</div>
 
 <p-overlayPanel #op>
   <span class="ui-float-label">

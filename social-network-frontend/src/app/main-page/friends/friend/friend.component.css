@@ -1,0 +1,11 @@
+.friend_link {
+  text-decoration: underline;
+}
+
+.friend {
+  padding-bottom: 20px;
+}
+
+.friend button {
+  margin-right: 10px;
+}

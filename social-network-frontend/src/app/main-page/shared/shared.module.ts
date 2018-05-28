@@ -11,7 +11,10 @@ import {DateFormatPipe} from './date-format.pipe';
     WallMessageComponent,
     DateFormatPipe
   ],
-  exports: [WallMessageComponent]
+  exports: [
+    WallMessageComponent,
+    DateFormatPipe
+  ]
 })
 export class SharedModule {
 }
