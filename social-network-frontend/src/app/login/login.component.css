@@ -1,0 +1,20 @@
+.login_container {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.login_tabs {
+  padding: 30px;
+}
+
+.login_form input {
+  margin: 30px;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  padding: .375rem .75rem;
+  line-height: 1.5;
+}
+
+.login_form label {
+  left: 18.25em;
+}

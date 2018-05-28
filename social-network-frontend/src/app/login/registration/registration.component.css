@@ -1,0 +1,23 @@
+input {
+  margin: 30px;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  padding: .375rem .75rem;
+  line-height: 1.5;
+}
+
+label {
+  left: 18.25em;
+}
+
+#password, #repeatPassword {
+  width: 40%;
+}
+
+.gender {
+  margin-bottom: 30px;
+}
+
+.gender p-radioButton {
+  margin-right: 20px
+}

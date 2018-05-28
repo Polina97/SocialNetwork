@@ -1,16 +1,16 @@
 <div class="ui-g">
-  <div class="ui-g-12">
-    <span *ngIf="currentProfile && currentProfile.firstName">
+  <div class="ui-g-12 main_header">
+    <span *ngIf="currentProfile && currentProfile.firstName" class="main-hello">
       Добро пожаловать, {{currentProfile.firstName}}
     </span>
-    <button pButton type="button" label="Выйти" (click)="logout()"></button>
+    <button pButton type="button" label="Выйти" (click)="logout()" class="logout"></button>
   </div>
   <div class="ui-g-2">
     <nav>
-      <a routerLink="/profile">Profile</a><br/>
-      <a routerLink="/messages">Messages</a><br/>
-      <a routerLink="/friends">Friends</a><br/>
-      <a routerLink="/groups">Groups</a><br/>
+      <a routerLink="/profile">Profile</a>
+      <a routerLink="/messages">Messages</a>
+      <a routerLink="/friends">Friends</a>
+      <a routerLink="/groups">Groups</a>
       <a routerLink="/manage-users" *ngIf="isAdmin">Manage users</a>
     </nav>
   </div>

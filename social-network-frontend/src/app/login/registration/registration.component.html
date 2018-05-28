@@ -16,11 +16,13 @@
     <label for="lName">Фамилия</label>
   </span>
 
-  <p-radioButton name="gender" value="0" [(ngModel)]="registration.gender" label="Мужчина"></p-radioButton>
-  <p-radioButton name="gender" value="1" [(ngModel)]="registration.gender" label="Женщина"></p-radioButton>
+  <div class="gender">
+    <p-radioButton name="gender" value="0" [(ngModel)]="registration.gender" label="М"></p-radioButton>
+    <p-radioButton name="gender" value="1" [(ngModel)]="registration.gender" label="Ж"></p-radioButton>
+  </div>
 
   <p-calendar [(ngModel)]="registration.birthDate" dateFormat="dd.mm.yy" name="birthDate" required [locale]="ru"
-              placeholder="Выберите дату рождения"></p-calendar>
+              placeholder="Дата рождения"></p-calendar>
 
   <span class="ui-float-label">
     <input id="password" type="password" pPassword [(ngModel)]="registration.password" name="password" required/>

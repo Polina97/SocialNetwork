@@ -1,19 +1,22 @@
-<p-selectButton [options]="types" [(ngModel)]="selectedType" (onChange)="handleTypeChange()"></p-selectButton>
+<div class="login_container">
+  <p-selectButton styleClass="login_tabs" [options]="types" [(ngModel)]="selectedType" (onChange)="handleTypeChange()"></p-selectButton>
 
-<form *ngIf="showLogin">
-  <span class="ui-float-label">
-    <input id="loginI" type="text" size="45" pInputText [(ngModel)]="login" required #loginI="ngModel" name="login">
-    <label for="loginI">Логин</label>
-  </span>
-  <span class="ui-float-label">
-    <input id="passwordI" type="password" size="45" pInputText [(ngModel)]="password" required #passwordI="ngModel"
-           name="password">
-    <label for="passwordI">Пароль</label>
-  </span>
-  <button pButton type="button" label="Войти" (click)="makeLogin()"
-          [disabled]="loginI.invalid || passwordI.invalid"></button>
-</form>
-<div *ngIf="userBlocked">
-  Пользователь заблокирован
+  <form *ngIf="showLogin" class="login_form">
+    <span class="ui-float-label">
+      <input id="loginI" type="text" size="45" pInputText [(ngModel)]="login" required #loginI="ngModel" name="login">
+      <label for="loginI">Логин</label>
+    </span>
+      <span class="ui-float-label">
+      <input id="passwordI" type="password" size="45" pInputText [(ngModel)]="password" required #passwordI="ngModel"
+             name="password">
+      <label for="passwordI">Пароль</label>
+    </span>
+      <button pButton type="button" label="Войти" (click)="makeLogin()"
+              [disabled]="loginI.invalid || passwordI.invalid"></button>
+  </form>
+  <div *ngIf="userBlocked">
+    Пользователь заблокирован
+  </div>
+  <app-registration *ngIf="!showLogin"></app-registration>
 </div>
-<app-registration *ngIf="!showLogin"></app-registration>
+

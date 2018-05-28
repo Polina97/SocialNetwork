@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {LoginService} from './login.service';
 import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
@@ -7,7 +7,8 @@ import {SelectItem} from 'primeng/api';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent {
   login: string;
