@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Profile} from './shared/profile';
 import {CookieService} from 'ngx-cookie-service';
 import {ProfileService} from './shared/profile.service';
@@ -8,7 +8,8 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProfileComponent implements OnInit {
   profile: Profile;

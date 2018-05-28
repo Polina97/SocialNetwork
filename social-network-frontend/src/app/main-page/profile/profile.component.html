@@ -1,17 +1,17 @@
 <div class="profile-info" *ngIf="profile">
   <img *ngIf="profile && profile.photoUrl" src="{{profile.photoUrl}}"/>
-  <br/>
-  <span>Имя: {{profile.firstName}} </span><br/>
-  <span>Фамилия: {{profile.lastName}}</span><br/>
-  <span>Дата рождения: {{profile.birthDay}}</span><br/>
+  <span>Имя: {{profile.firstName}} </span>
+  <span>Фамилия: {{profile.lastName}}</span>
+  <span>Дата рождения: {{profile.birthDay}}</span>
   <span>Семейный статус: {{profile.martialStatus}}</span>
 </div>
-<div *ngIf="!myProfile">
+<div class="line"></div>
+<div *ngIf="!myProfile" class="buttons">
   <button pButton type="button" label="Добавить в друзья"></button>
   <button pButton type="button" label="Написать сообщение"></button>
 </div>
-<br/>
-<div class="wall-message">
+<div class="line"></div>
+<div>
   <div *ngIf="profile && profile.wallMessages">
     <div *ngFor="let wallMessage of profile.wallMessages">
       <app-wall-message [wallMessage]="wallMessage"></app-wall-message>

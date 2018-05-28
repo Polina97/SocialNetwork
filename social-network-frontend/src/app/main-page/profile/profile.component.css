@@ -1,0 +1,20 @@
+.profile-info {
+  margin-bottom: 10px;
+}
+
+.profile-info span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.profile-info img {
+  margin-bottom: 10px;
+}
+
+.buttons {
+  margin-bottom: 10px;
+}
+
+.buttons button{
+  margin-right: 10px;
+}
